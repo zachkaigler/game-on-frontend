@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Button } from "semantic-ui-react"
 import GroupsInfo from "./GroupsInfo"
 import ProfileInfo from "./ProfileInfo"
@@ -23,7 +23,7 @@ function Profile() {
             <div className="page-container">
                 <div className="page-content">
                     <ProfileInfo userData={userData} />
-                    <Button className="profile-btn">Edit Profile</Button>
+                    <Button as={Link} to="/editprofile" className="profile-btn">Edit Profile</Button>
                     <GroupsInfo userData={userData}/>
                 </div>
             </div>

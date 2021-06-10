@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from "react-router-dom"
+import EditProfile from './EditProfile';
 import Header from './Header';
 import Login from './Login';
 import Profile from './Profile';
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route exact path="/signup">
             <SignUp onLogin={onLogin}/>
+          </Route>
+          <Route exact path="/editprofile">
+            <EditProfile loggedInUser={loggedInUser}/>
           </Route>
         </Switch>
       </div>
