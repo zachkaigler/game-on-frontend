@@ -11,3 +11,137 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.header {
+  color: #ff860b;
+  background-color: #fff8e2;
+  display: flex;
+  justify-content: space-between;
+  border: solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-left: 12%;
+  padding-right: 12%;
+  height: 5em;
+  position: relative;
+}
+
+.header h2 {
+  font-family: 'Prompt', sans-serif;
+  font-weight: 200;
+  font-size: 50px;
+  margin-bottom: 0;
+}
+
+.header a {
+  font-family: 'Prompt', sans-serif;
+  margin-bottom: 0;
+  padding-bottom: 15px;
+  color: #ff860b;
+}
+
+#profile-badge-nav {
+  position: relative;
+  top: 20%;
+  left: 380%;
+  height: 100px;
+  border-radius: 50%;
+  border: solid;
+  border-color: #ff860b;
+}
+
+.nav-elements {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  top: 20%
+}
+
+.profile-badge {
+  height: 100px;
+  border-radius: 50%;
+  border: solid;
+  border-color: #ff860b;
+}
+
+.page-container {
+  height: 100vh;
+  background-color: #f3f2f2;
+}
+
+.page-content {
+  height: 100vh;
+  background-color: white;
+  margin-left: 12%;
+  margin-right: 12%;
+  padding: 3%
+}
+
+.profile-h1 {
+  font-family: 'Prompt', sans-serif;
+  color: #ff860b;
+  font-size: 55px;
+}
+
+#groups {
+  font-size: 40px;
+}
+
+.profile-info {
+  display: flex;
+  margin-bottom: 30px;
+  width: auto;
+}
+
+.prof-pic {
+  box-shadow: 10px 10px 10px rgba(181, 181, 181, 0.671);
+}
+
+.user-info {
+  padding-left: 40px;
+}
+
+.line {
+  border-bottom: 1px solid #ff860b;
+  width: auto;
+}
+
+.user-info h3 {
+  font-family: 'Prompt', sans-serif;
+  color: #ff860b;
+  padding-left: 0;
+}
+
+.bio {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.item {
+  display: inline-block;
+}
+
+.item + .item::before {
+  display: inline-block;
+  white-space: pre;
+  content: ", ";
+}
+
+button.ui.button.profile-btn {
+  margin-left: 13%;
+}
+
+.groups-info {
+  margin-top: 40px;
+}
+
+.group-card {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f3f2f2;
+  height: 250px;
+  width: 90%;
+  margin: 10px;
+}
