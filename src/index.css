@@ -67,12 +67,12 @@ code {
 }
 
 .page-container {
-  height: 100vh;
+  height: auto;
   background-color: #f3f2f2;
 }
 
 .page-content {
-  height: 100vh;
+  height: auto;
   background-color: white;
   margin-left: 12%;
   margin-right: 12%;

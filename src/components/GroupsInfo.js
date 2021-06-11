@@ -2,7 +2,9 @@ import GroupCard from "./GroupCard"
 
 function GroupsInfo({userData}) {
 
-    const groups = userData.joined_groups.map((group) => {
+    const combinedGroups = [...userData.owned_groups, ...userData.joined_groups]
+
+    const groups = combinedGroups.map((group) => {
         return <GroupCard key={group.id}
                           name={group.group_name}
                           game={group.game.name}
@@ -15,7 +17,7 @@ function GroupsInfo({userData}) {
 
     return (
         <div className="groups-info">
-            <h1 className="profile-h1" id="groups">Groups ({userData.joined_groups.length})</h1>
+            <h1 className="profile-h1" id="groups">Groups ({combinedGroups.length})</h1>
             <div className="line info-panel"></div>
             <div className="card-container">
                 {groups}

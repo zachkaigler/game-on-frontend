@@ -20,7 +20,7 @@ function ProfileInfo({ userData }) {
                 { userData.bio ? <p className="bio">{userData.bio}</p> : <p>N/A</p>}
                 <h3 className="user-info label">Location</h3>
                 { userData.location ? <p className="bio">{userData.location}</p> : <p>N/A</p>}
-                <h3 className="user-info label">Wants to Play</h3>
+                <h3 className="user-info label">Looking to Play</h3>
                 { userData.games.length !== 0 ? <p className="bio">{games}</p> : <p>No games yet.</p>}
             </div>
         </div>

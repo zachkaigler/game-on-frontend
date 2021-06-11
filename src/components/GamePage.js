@@ -81,8 +81,8 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
             <div className="page-container">
                 <div className="page-content">
                     <div className="game-header">
-                        <h2>Users playing {gameData.name}</h2> 
-                        { usersGames.includes(gameData.name) ? <Button onClick={destroyInterest}>Sit this one out</Button> : <Button onClick={createInterest}>Count me in!</Button> }
+                        <h2>Users looking to play {gameData.name}</h2> 
+                        { usersGames.includes(gameData.name) ? <Button onClick={destroyInterest}>Count me out</Button> : <Button onClick={createInterest}>I'm game!</Button> }
                     </div>
                    <div className="line info-panel"></div>
                    <div className="game-player-list">
