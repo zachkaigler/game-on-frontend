@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
 import { Form, Input, Button, TextArea, Label } from "semantic-ui-react";
-import { Redirect, useHistory } from "react-router-dom"
+import { Redirect, useHistory, Link } from "react-router-dom"
 
 function EditProfile( {loggedInUser} ) {
-    const [bio, setBio] = useState(null)
-    const [location, setLocation] = useState(null)
-    const [picture, setPicture] = useState(null)
-
-    function handleSubmit(e) {
-        e.preventDefault()
-    }
-
+    const [bio, setBio] = useState("")
+    const [location, setLocation] = useState("")
+    const [picture, setPicture] = useState("")
+    const history = useHistory()
+    
     useEffect(() => {
         if (loggedInUser) {
             fetch(`http://localhost:3000/users/${loggedInUser.id}`, {
-                    method: "GET",
-                    headers: {
-                    "Authorization": localStorage.token
+                method: "GET",
+                headers: {
+                    "Authorization": loggedInUser.token
                 }
             })
             .then(resp => resp.json())
@@ -27,6 +24,27 @@ function EditProfile( {loggedInUser} ) {
             })
         }
     }, [loggedInUser])
+    
+    function handleSubmit(e) {
+        e.preventDefault()
+        fetch(`http://localhost:3000/users/${loggedInUser.id}`, {
+            method: "PATCH",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": loggedInUser.token
+            },
+            body: JSON.stringify({
+                bio: bio,
+                location: location,
+                profile_pic: picture
+            })
+        })
+        .then(resp => resp.json())
+        .then((updatedUser) => {
+            console.log(updatedUser)
+            history.push(`/profile/${loggedInUser.id}`)
+        })
+    }
 
     if (loggedInUser) {
         return(
@@ -40,7 +58,8 @@ function EditProfile( {loggedInUser} ) {
                             <Input className="input" type="text" value={location} onChange={(e) => setLocation(e.target.value)}/><br/>
                             <Label>Profile Picture</Label><br/>
                             <Input className="input" placeholder="Profile Picture" type="url" value={picture} onChange={(e) => setPicture(e.target.value)}/><br/>
-                            <Button>Update Information</Button>
+                            <Button>Update Information</Button><br/>
+                            <Button className="cancel" as={Link} to={`/profile/${loggedInUser.id}`}>Cancel</Button>
                         </Form>
                     </div>
                 </div>

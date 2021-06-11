@@ -4,7 +4,7 @@ import { Button } from "semantic-ui-react"
 import GroupsInfo from "./GroupsInfo"
 import ProfileInfo from "./ProfileInfo"
 
-function Profile() {
+function Profile({ loggedInUser }) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [userData, setUserData] = useState({})
     const params = useParams()
@@ -23,7 +23,11 @@ function Profile() {
             <div className="page-container">
                 <div className="page-content">
                     <ProfileInfo userData={userData} />
-                    <Button as={Link} to="/editprofile" className="profile-btn">Edit Profile</Button>
+                    { userData.id === loggedInUser.id ? 
+                    <Button as={Link} to="/editprofile" className="profile-btn">Edit Profile</Button> 
+                    : 
+                    <Button className="profile-btn">Message</Button>
+                    }
                     <GroupsInfo userData={userData}/>
                 </div>
             </div>

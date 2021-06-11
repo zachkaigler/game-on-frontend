@@ -37,7 +37,7 @@ function App() {
             { loggedInUser ? <Redirect to={`/profile/${loggedInUser.id}`} /> : <Login onLogin={onLogin}/> }
           </Route>
           <Route exact path="/profile/:id">
-            <Profile />
+            <Profile loggedInUser={loggedInUser}/>
           </Route>
           <Route exact path="/signup">
             <SignUp onLogin={onLogin}/>
