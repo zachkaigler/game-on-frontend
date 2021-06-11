@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom"
+
 function ProfileInfo({ userData }) {
 
     let games = null
 
     if (userData.games.length !== 0) {
         games = userData.games.map((game) => {
-            return <span key={game.id} className="item">{game.name}</span>
+            return <Link to={`/games/${game.id}`}key={game.id} className="item">{game.name}</Link>
         }) 
     }
-    
 
     return (
         <div className="profile-info">

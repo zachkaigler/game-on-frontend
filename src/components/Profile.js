@@ -34,7 +34,11 @@ function Profile({ loggedInUser }) {
         )
     } else {
         return (
-            null
+            <div className="page-container">
+                <div className="page-content">
+                    
+                </div>
+            </div>
         )
     }
 }

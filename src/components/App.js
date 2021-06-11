@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from "react-router-dom"
 import EditProfile from './EditProfile';
+import GamePage from './GamePage';
+import Games from './Games';
 import Header from './Header';
 import Login from './Login';
 import Profile from './Profile';
@@ -8,9 +10,11 @@ import SignUp from './SignUp';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null)
+  const [loggedInUserGames, setLoggedInUserGames] = useState([])
 
   function onLogin(userInfo) {
     setLoggedInUser(userInfo)
+    setLoggedInUserGames([...userInfo.games])
   }
 
   useEffect(() => {
@@ -24,6 +28,7 @@ function App() {
       .then(resp => resp.json())
       .then(data => {
           setLoggedInUser(data)
+          setLoggedInUserGames([...data.games])
       })
     }
   }, [])
@@ -44,6 +49,12 @@ function App() {
           </Route>
           <Route exact path="/editprofile">
             <EditProfile loggedInUser={loggedInUser}/>
+          </Route>
+          <Route exact path="/games">
+            <Games />
+          </Route>
+          <Route exact path="/games/:id">
+            <GamePage loggedInUser={loggedInUser} loggedInUserGames={loggedInUserGames} setLoggedInUserGames={setLoggedInUserGames}/>
           </Route>
         </Switch>
       </div>
