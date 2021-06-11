@@ -12,6 +12,7 @@ function GroupsInfo({userData}) {
                           time={group.group_time}
                           members={group.users.length}
                           image={group.group_image}
+                          id={group.id}
         />
     })
 

@@ -41,7 +41,7 @@ function EditProfile( {loggedInUser} ) {
         })
         .then(resp => resp.json())
         .then((updatedUser) => {
-            console.log(updatedUser)
+            // console.log(updatedUser)
             history.push(`/profile/${loggedInUser.id}`)
         })
     }
@@ -58,9 +58,9 @@ function EditProfile( {loggedInUser} ) {
                             <Input className="input" type="text" value={location} onChange={(e) => setLocation(e.target.value)}/><br/>
                             <Label>Profile Picture</Label><br/>
                             <Input className="input" placeholder="Profile Picture" type="url" value={picture} onChange={(e) => setPicture(e.target.value)}/><br/>
-                            <Button>Update Information</Button><br/>
-                            <Button className="cancel" as={Link} to={`/profile/${loggedInUser.id}`}>Cancel</Button>
+                            <Button>Save Changes</Button><br/>
                         </Form>
+                            <Button className="cancel" as={Link} to={`/profile/${loggedInUser.id}`}>Cancel</Button>
                     </div>
                 </div>
             </div>

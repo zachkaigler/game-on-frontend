@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
-import { Button } from "semantic-ui-react"
+import { useParams } from "react-router-dom"
 import GroupsInfo from "./GroupsInfo"
 import ProfileInfo from "./ProfileInfo"
 
@@ -22,12 +21,7 @@ function Profile({ loggedInUser }) {
         return (
             <div className="page-container">
                 <div className="page-content">
-                    <ProfileInfo userData={userData} />
-                    { userData.id === loggedInUser.id ? 
-                    <Button as={Link} to="/editprofile" className="profile-btn">Edit Profile</Button> 
-                    : 
-                    <Button className="profile-btn">Message</Button>
-                    }
+                    <ProfileInfo userData={userData} loggedInUser={loggedInUser}/>
                     <GroupsInfo userData={userData}/>
                 </div>
             </div>

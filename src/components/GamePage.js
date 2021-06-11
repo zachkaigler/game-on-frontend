@@ -71,7 +71,8 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
                         location={group.group_location}
                         time={group.group_time}
                         members={group.users.length}
-                        image={group.group_image}    
+                        image={group.group_image}
+                        id={group.id}    
                     />
         })
 
@@ -90,7 +91,7 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
                    </div>
                    <h2>{gameData.name} Groups</h2>
                    <div className="line info-panel"></div>
-                   <div className="game-group-list">
+                   <div className="card-container">
                         { gameData.groups.length === 0 ? <p>N/A</p> : groups }
                    </div>
                 </div>

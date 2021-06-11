@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from "react-router-dom"
+import EditGroup from './EditGroup';
 import EditProfile from './EditProfile';
 import GamePage from './GamePage';
 import Games from './Games';
+import GroupPage from './GroupPage';
 import Header from './Header';
 import Login from './Login';
 import Profile from './Profile';
@@ -55,6 +57,12 @@ function App() {
           </Route>
           <Route exact path="/games/:id">
             <GamePage loggedInUser={loggedInUser} loggedInUserGames={loggedInUserGames} setLoggedInUserGames={setLoggedInUserGames}/>
+          </Route>
+          <Route exact path="/groups/:id">
+            <GroupPage loggedInUser={loggedInUser} />
+          </Route>
+          <Route exact path="/groups/:id/edit">
+            <EditGroup loggedInUser={loggedInUser} />
           </Route>
         </Switch>
       </div>

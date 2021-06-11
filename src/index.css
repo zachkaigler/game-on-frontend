@@ -45,7 +45,9 @@ code {
   position: relative;
   top: 20%;
   left: 220%;
-  height: 100px;
+  object-fit: cover;
+  width:100px;
+  height:100px;
   border-radius: 50%;
   border: solid;
   border-color: #ff860b;
@@ -59,11 +61,14 @@ code {
 }
 
 .profile-badge {
-  height: 100px;
+  object-fit: cover;
+  width:100px;
+  height:100px;
   border-radius: 50%;
-  /* border: solid;
-  border-color: #ff860b; */
+  border: solid;
+  border-color: #fff8e2;
   box-shadow: 10px 10px 10px rgba(181, 181, 181, 0.671);
+  margin: 10px;
 }
 
 .page-container {
@@ -72,7 +77,7 @@ code {
 }
 
 .page-content {
-  height: auto;
+  height: 100vh;
   background-color: white;
   margin-left: 12%;
   margin-right: 12%;
@@ -97,6 +102,9 @@ code {
 
 .prof-pic {
   box-shadow: 10px 10px 10px rgba(181, 181, 181, 0.671);
+  object-fit: cover;
+  width:400px;
+  height:400px;
 }
 
 .user-info {
@@ -120,7 +128,7 @@ code {
   font-weight: bold;
 }
 
-.item {
+.game {
   display: inline-block;
   font-family: 'Courier New', Courier, monospace;
   font-size: 17px;
@@ -128,15 +136,11 @@ code {
   color: black;
 }
 
-.item + .item::before {
+.game + .game::before {
   display: inline-block;
   white-space: pre;
   content: ", ";
 }
-
-/* button.ui.button.profile-btn {
-  margin-left: 13%;
-} */
 
 .groups-info {
   margin-top: 40px;
@@ -144,11 +148,14 @@ code {
 
 .group-card {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   background-color: #f3f2f2;
   height: 250px;
-  width: 90%;
-  margin: 10px;
+  width: 600px;
+  margin: 30px;
+  box-shadow: 10px 10px 10px rgba(181, 181, 181, 0.671);
+  border-radius: 30px;
 }
 
 .games-list {
@@ -160,4 +167,76 @@ code {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-column h3 {
+  font-family: 'Prompt', sans-serif;
+  color: #ff860b;
+  padding-left: 0;
+}
+
+.profile-btn {
+  width: 200px;
+}
+
+.ui.button{
+  margin-top: 20px;
+}
+
+.admin-star {
+  font-size: 35px;
+  position: relative;
+  top: 0px;
+  left: 78px;
+  z-index: 10;
+  margin-left: -40px;
+}
+
+.admin-badge {
+  border: solid;
+  border-color: #ffe061;
+}
+
+.group-card-link {
+  color: black;
+  width: 600px;
+}
+
+.group-card-link:hover {
+  color: black;
+}
+
+.group-card-img {
+  margin: 20px
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.under-pic {
+  text-align: center;
+}
+
+.under-pic h3 {
+  margin-top: 20px;
+  margin-bottom: 0px;
 }
