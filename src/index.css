@@ -270,3 +270,7 @@ code {
 .unloaded {
   height: 100vh;
 }
+
+.username {
+  color: rgb(82, 82, 82);
+}

@@ -11,7 +11,6 @@ function ProfileInfo({ userData, loggedInUser }) {
         }) 
     }
 
-        //LOGIC FOR NOT RENDERING A BUTTON IF A USER IS NOT LOGGED IN. FIX LATER
     function renderButton(loggedInUser) {
         if (loggedInUser) {
             if (userData.id === loggedInUser.id ) {
@@ -36,14 +35,14 @@ function ProfileInfo({ userData, loggedInUser }) {
                 {renderButton(loggedInUser)}
             </div>
             <div className="user-info" id="group-info">
-                <h1 className="profile-h1">{userData.username}</h1>
+                <h1 className="profile-h1 username">{userData.username}</h1>
                 <div className="line info-panel"></div>
                 <h3 className="user-info label">Bio</h3>
                 { userData.bio ? <p className="bio">{userData.bio}</p> : <p className="bio">N/A</p>}
                 <h3 className="user-info label">Location</h3>
                 { userData.location ? <p className="bio">{userData.location}</p> : <p className="bio">N/A</p>}
                 <h3 className="user-info label">Looking to Play</h3>
-                { userData.games.length !== 0 ? <p className="bio">{games}</p> : <p className="bio">N/A</p>}
+                { userData.games.length !== 0 ? <p className="bio">{games}</p> : <Link to="/games">None yet. Add some!</Link>}
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from "react-router-dom"
+import CreateGroup from './CreateGroup';
 import EditGroup from './EditGroup';
 import EditProfile from './EditProfile';
 import GamePage from './GamePage';
@@ -63,6 +64,10 @@ function App() {
           </Route>
           <Route exact path="/groups/:id/edit">
             <EditGroup loggedInUser={loggedInUser} />
+          </Route>
+          <Route exact path="/creategroup">
+            { loggedInUser ? <CreateGroup loggedInUser={loggedInUser} /> : <Redirect to="/" />  }
+            {/* <CreateGroup loggedInUser={loggedInUser} /> */}
           </Route>
         </Switch>
       </div>

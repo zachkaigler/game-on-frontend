@@ -9,7 +9,7 @@ function Login({ onLogin }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(`Sent username: ${username} Sent password: ${password}`)
+   
         fetch("http://localhost:3000/login", {
             method: "POST",
             headers:{

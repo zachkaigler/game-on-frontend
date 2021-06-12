@@ -238,7 +238,16 @@ function EditGroup({ loggedInUser }) {
         })
     }
     
-    // ADD DELETE FUNCTIONALITY TO BUTTON
+    function handleDelete() {
+        fetch(`http://localhost:3000/groups/${params.id}`, {
+            method: "DELETE",
+            headers: {"Authorization": localStorage.token}
+        })
+        .then(resp => resp.json())
+        .then((resp) => {
+            history.push(`/profile/${loggedInUser.id}`)
+        })
+    }
 
     if (isLoaded) {
         return (
@@ -247,20 +256,20 @@ function EditGroup({ loggedInUser }) {
                     <div className="edit-group">
                         <Form onSubmit={handleSubmit}>
                             <Label>Group Name</Label><br/>
-                                <Input className="input" type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)}/><br/>
+                                <Input required className="input" type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)}/><br/>
                             <Label>About</Label><br/>
-                                <TextArea name="About" className="input" maxLength="250" type="text" value={groupAbout} onChange={(e) => setGroupAbout(e.target.value)}/><br/>
+                                <TextArea required name="About" className="input" maxLength="250" type="text" value={groupAbout} onChange={(e) => setGroupAbout(e.target.value)}/><br/>
                             <Label>Location</Label><br/>
-                                <Input className="input" type="text" value={groupLocation} onChange={(e) => setGroupLocation(e.target.value)}/><br/>
+                                <Input required className="input" type="text" value={groupLocation} onChange={(e) => setGroupLocation(e.target.value)}/><br/>
                             <Label>Time</Label><br/>
-                                <Dropdown fluid selection options={days} onChange={(e, r) => setGroupDay(r.value)} value={groupDay}/> <Dropdown fluid selection options={times} onChange={(e, r) => setGroupTime(r.value)} value={groupTime}/><br/>
+                                <Dropdown required fluid selection options={days} onChange={(e, r) => setGroupDay(r.value)} value={groupDay}/> <Dropdown fluid selection options={times} onChange={(e, r) => setGroupTime(r.value)} value={groupTime}/><br/>
                             <Label>Accepting new members?</Label>
-                                <Dropdown fluid selection options={trueFalse} onChange={(e, r) => setOpen(r.value)} value={open}/><br/>
+                                <Dropdown required fluid selection options={trueFalse} onChange={(e, r) => setOpen(r.value)} value={open}/><br/>
                             <Label>Group Picture</Label><br/>
-                                <Input className="input" placeholder="Profile Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/>
+                                <Input required className="input" placeholder="Profile Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/>
                             <Button>Save Changes</Button>
                         </Form>
-                            <Button className="delete">Delete Group</Button><br />
+                            <Button className="delete" onClick={handleDelete}>Delete Group</Button><br />
                             <Button className="cancel" as={Link} to={`/groups/${params.id}`}>Cancel</Button>
                     </div> 
                 </div>
