@@ -18,7 +18,11 @@ function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray 
                     </div>
                 )
             } else if (membersArray.map((user) => user.id).includes(loggedInUser.id)) {
-                return <Button className="profile-btn" onClick={handleLeaveGroup}>Leave Group</Button>
+                return (
+                    <div className="under-pic">
+                        <h3>Member</h3>
+                        <Button className="profile-btn" onClick={handleLeaveGroup}>Leave Group</Button>
+                    </div>)
             } else {
                 return <Button className="profile-btn">Ask to Join</Button>
             }
