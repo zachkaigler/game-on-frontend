@@ -12,27 +12,28 @@ function ProfileInfo({ userData, loggedInUser }) {
     }
 
         //LOGIC FOR NOT RENDERING A BUTTON IF A USER IS NOT LOGGED IN. FIX LATER
-    // function renderButton(loggedInUser) {
-    //     if (loggedInUser) {
-    //         { userData.id === loggedInUser.id ? 
-    //             <Button as={Link} to="/editprofile" className="profile-btn">Edit Profile</Button> 
-    //             : 
-    //             <Button className="profile-btn">Message</Button>
-    //             }
-    //     } else {
-    //         return null
-    //     }
-    // }
+    function renderButton(loggedInUser) {
+        if (loggedInUser) {
+            if (userData.id === loggedInUser.id ) {
+                return <Button as={Link} to="/editprofile" className="profile-btn">Edit Profile</Button> 
+            } else {
+                return <Button className="profile-btn">Message</Button>
+            }
+        } else {
+            return null
+        }
+    }
 
     return (
         <div className="profile-info">
             <div className="left-column">
                 <img src={userData.profile_pic} alt={userData.username} className="prof-pic"/>
-                { userData.id === loggedInUser.id ? 
+                {/* { userData.id === loggedInUser.id ? 
                         <Button as={Link} to="/editprofile" className="profile-btn">Edit Profile</Button> 
                         : 
                         <Button className="profile-btn">Message</Button>
-                        }
+                } */}
+                {renderButton(loggedInUser)}
             </div>
             <div className="user-info" id="group-info">
                 <h1 className="profile-h1">{userData.username}</h1>

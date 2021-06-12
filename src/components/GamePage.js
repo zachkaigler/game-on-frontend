@@ -22,8 +22,6 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
             setIsLoaded(true)
         })
     }, [params.id])
-
-    
     
     if (isLoaded) {
         function destroyInterest() {
@@ -43,6 +41,7 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
                 headers: {"Authorization": localStorage.token}
             })
         }
+
         function createInterest() {
             setLoggedInUserGames([...loggedInUserGames, gameData])
             setUsersPlaying([...usersPlaying, loggedInUser])
@@ -78,18 +77,31 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
 
         const usersGames = loggedInUserGames.map((game) => game.name)
 
+        function checkLoggedInStatus(loggedInUser) {
+            if (loggedInUser) {
+                if (usersGames.includes(gameData.name)) {
+                    return <Button onClick={destroyInterest}>Count me out</Button>
+                } else {
+                    return <Button onClick={createInterest}>I'm game!</Button>
+                }
+            } else {
+                return null
+            }
+        }
+
         return(
             <div className="page-container">
                 <div className="page-content">
                     <div className="game-header">
-                        <h2>Users looking to play {gameData.name}</h2> 
-                        { usersGames.includes(gameData.name) ? <Button onClick={destroyInterest}>Count me out</Button> : <Button onClick={createInterest}>I'm game!</Button> }
+                        <h1 className="profile-h1 game-page">Users looking to play {gameData.name}</h1> 
+                        {/* { usersGames.includes(gameData.name) ? <Button onClick={destroyInterest}>Count me out</Button> : <Button onClick={createInterest}>I'm game!</Button> } */}
+                        {checkLoggedInStatus(loggedInUser)}
                     </div>
                    <div className="line info-panel"></div>
                    <div className="game-player-list">
                        { usersPlaying.length === 0 ? <p>N/A</p> : userIcons }
                    </div>
-                   <h2>{gameData.name} Groups</h2>
+                   <h1 className="profile-h1 game-page">{gameData.name} groups</h1>
                    <div className="line info-panel"></div>
                    <div className="card-container">
                         { gameData.groups.length === 0 ? <p>N/A</p> : groups }
@@ -98,7 +110,12 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
             </div>
         )
     } else {
-        return null
+        return (
+            <div className="page-container unloaded">
+            <div className="page-content unloaded">
+            </div>
+            </div>
+        )
     }
 }
 

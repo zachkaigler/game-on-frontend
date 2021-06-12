@@ -23,8 +23,10 @@ function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray 
                         <h3>Member</h3>
                         <Button className="profile-btn" onClick={handleLeaveGroup}>Leave Group</Button>
                     </div>)
-            } else {
+            } else if (groupData.open) {
                 return <Button className="profile-btn">Ask to Join</Button>
+            } else {
+                return null
             }
         } else {
             return null

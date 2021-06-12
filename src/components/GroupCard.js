@@ -6,7 +6,7 @@ function GroupCard({ name, game, location, time, members, image, id }) {
         <Link className="group-card-link" to={`/groups/${id}`}>
             <div className="group-card">
                 <div className="left-column">
-                    <img src={image} alt={name} style={{ height: "200px" }} className="group-card-img"/>
+                    <img src={image} alt={name} className="group-card-img"/>
                 </div>
                 <div className="right-column">
                     <h3 className="user-info label">{name}</h3>
