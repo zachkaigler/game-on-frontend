@@ -12,7 +12,6 @@ function Header({loggedInUser, setLoggedInUser}) {
     return (
         <div className="header">
             <img src="https://i.imgur.com/fwSD2s0.png" alt="game-on" style={{ height: "70px" }} />
-            {/* <h2 className="nav-elements">GAME ON</h2> */}
             <div className="nav-btns-container">
                 { loggedInUser ? <span className="icons"><NavLink to="/games" className="nav-elements"><img src="https://i.imgur.com/PiITIgg.png" alt="games" style={{ height: "65px"}}/></NavLink></span> : null}
                 { loggedInUser ? <span className="icons"><NavLink to={`/profile/${loggedInUser.id}`} className="nav-elements"><img src="https://i.imgur.com/gq5Ra6O.png" alt="find-groups" style={{ height: "65px"}}/></NavLink></span> : null}

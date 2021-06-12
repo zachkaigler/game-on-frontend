@@ -36,42 +36,41 @@ function App() {
     }
   }, [])
   
-
-    return (
-      <div className="App">
-        <Header loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
-        <Switch>
-          <Route exact path="/">
-            { loggedInUser ? <Redirect to={`/profile/${loggedInUser.id}`} /> : <Login onLogin={onLogin}/> }
-          </Route>
-          <Route exact path="/profile/:id">
-            <Profile loggedInUser={loggedInUser}/>
-          </Route>
-          <Route exact path="/signup">
-            <SignUp onLogin={onLogin}/>
-          </Route>
-          <Route exact path="/editprofile">
-            <EditProfile loggedInUser={loggedInUser}/>
-          </Route>
-          <Route exact path="/games">
-            <Games />
-          </Route>
-          <Route exact path="/games/:id">
-            <GamePage loggedInUser={loggedInUser} loggedInUserGames={loggedInUserGames} setLoggedInUserGames={setLoggedInUserGames}/>
-          </Route>
-          <Route exact path="/groups/:id">
-            <GroupPage loggedInUser={loggedInUser} />
-          </Route>
-          <Route exact path="/groups/:id/edit">
-            <EditGroup loggedInUser={loggedInUser} />
-          </Route>
-          <Route exact path="/creategroup">
-            { loggedInUser ? <CreateGroup loggedInUser={loggedInUser} /> : <Redirect to="/" />  }
-            {/* <CreateGroup loggedInUser={loggedInUser} /> */}
-          </Route>
-        </Switch>
-      </div>
-    );
+  return (
+    <div className="App">
+      <Header loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
+      <Switch>
+        <Route exact path="/">
+          { loggedInUser ? <Redirect to={`/profile/${loggedInUser.id}`} /> : <Login onLogin={onLogin}/> }
+        </Route>
+        <Route exact path="/profile/:id">
+          <Profile loggedInUser={loggedInUser}/>
+        </Route>
+        <Route exact path="/signup">
+          <SignUp onLogin={onLogin}/>
+        </Route>
+        <Route exact path="/editprofile">
+          <EditProfile loggedInUser={loggedInUser}/>
+        </Route>
+        <Route exact path="/games">
+          <Games />
+        </Route>
+        <Route exact path="/games/:id">
+          <GamePage loggedInUser={loggedInUser} loggedInUserGames={loggedInUserGames} setLoggedInUserGames={setLoggedInUserGames}/>
+        </Route>
+        <Route exact path="/groups/:id">
+          <GroupPage loggedInUser={loggedInUser} />
+        </Route>
+        <Route exact path="/groups/:id/edit">
+          <EditGroup loggedInUser={loggedInUser} />
+        </Route>
+        <Route exact path="/creategroup">
+          { loggedInUser ? <CreateGroup loggedInUser={loggedInUser} /> : <Redirect to="/" />  }
+          {/* <CreateGroup loggedInUser={loggedInUser} /> */}
+        </Route>
+      </Switch>
+    </div>
+  );
 }
 
 export default App;

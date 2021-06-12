@@ -6,6 +6,7 @@ import MembersInfo from "./MembersInfo"
 function GroupPage({ loggedInUser }) {
     const [groupData, setGroupData] = useState({})
     const [membersArray, setMembersArray] = useState([])
+    const [membershipsArray, setMembershipsArray] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
     const params = useParams()
 
@@ -15,6 +16,7 @@ function GroupPage({ loggedInUser }) {
         .then((serverData) => {
             setGroupData(serverData)
             setMembersArray(serverData.users)
+            setMembershipsArray(serverData.memberships)
             setIsLoaded(true)
         })
     }, [params.id])
@@ -23,8 +25,19 @@ function GroupPage({ loggedInUser }) {
         return (
             <div className="page-container">
                 <div className="page-content">
-                        <GroupPageInfo groupData={groupData} loggedInUser={loggedInUser} membersArray={membersArray} setMembersArray={setMembersArray}/>
-                        <MembersInfo groupData={groupData} membersArray={membersArray}/>
+                        <GroupPageInfo groupData={groupData} 
+                                       loggedInUser={loggedInUser} 
+                                       membersArray={membersArray} 
+                                       setMembersArray={setMembersArray} 
+                                       membershipsArray={membershipsArray}
+                                       setMembershipsArray={setMembershipsArray}/>
+                        <MembersInfo groupData={groupData} 
+                                     membersArray={membersArray}
+                                     loggedInUser={loggedInUser}
+
+                                     setMembersArray={setMembersArray} 
+                                     membershipsArray={membershipsArray}
+                                     setMembershipsArray={setMembershipsArray}/>
                 </div>
             </div>
         )

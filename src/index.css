@@ -124,6 +124,7 @@ code {
 
 .user-info {
   padding-left: 40px;
+  width: 100%;
 }
 
 .line {
@@ -217,6 +218,7 @@ code {
   left: 78px;
   z-index: 10;
   margin-left: -40px;
+  cursor: default
 }
 
 .admin-badge {
@@ -276,5 +278,5 @@ code {
 }
 
 .username {
-  color: #767676;
+  color: #ff860b;
 }

@@ -1,11 +1,22 @@
 import { Button } from "semantic-ui-react";
 import { Link } from "react-router-dom"
 
-function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray }) {
+function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray, membershipsArray, setMembershipsArray }) {
 
-    // Build actual fetch to delete membership!!
     function handleLeaveGroup() {
         setMembersArray([...membersArray].filter((member) =>  member.id !== loggedInUser.id))
+
+        const foundMembership = membershipsArray.find((membership) => membership.user_id === loggedInUser.id && membership.group_id === groupData.id)
+        setMembershipsArray([...membershipsArray].filter((membership) => membership !== foundMembership))
+
+        fetch(`http://localhost:3000/memberships/${foundMembership.id}`, {
+            method: "DELETE",
+            headers: {"Authorization": localStorage.token}
+        })
+    }
+
+    function handleRequestJoin() {
+        
     }
 
     function checkUserStatus(loggedInUser) {
@@ -24,7 +35,7 @@ function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray 
                         <Button className="profile-btn" onClick={handleLeaveGroup}>Leave Group</Button>
                     </div>)
             } else if (groupData.open) {
-                return <Button className="profile-btn">Ask to Join</Button>
+                return <Button className="profile-btn" onClick={handleRequestJoin}>Ask to Join</Button>
             } else {
                 return null
             }
@@ -37,7 +48,6 @@ function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray 
         <div className="profile-info">
             <div className="left-column">
                 <img src={groupData.group_image} alt={groupData.group_name} style={{ height: "400px"}} className="prof-pic"/>
-                {/* <Button className="profile-btn">Edit Group</Button> */}
                 {checkUserStatus(loggedInUser)}
             </div>
             <div className="user-info">
