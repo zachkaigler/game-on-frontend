@@ -73,7 +73,7 @@ code {
   border-radius: 50%;
   border: solid;
   border-color: #fff8e2;
-  box-shadow: 10px 10px 10px rgba(181, 181, 181, 0.671);
+  box-shadow: 0px 0px 25px rgba(167, 167, 167, 0.671);
   margin: 10px;
 }
 
@@ -112,7 +112,7 @@ code {
 }
 
 .prof-pic {
-  box-shadow: 10px 10px 10px rgba(181, 181, 181, 0.671);
+  box-shadow: 0px 0px 100px -30px rgba(181, 181, 181, 0.671);
   object-fit: cover;
   width:400px;
   height:400px;
@@ -272,5 +272,5 @@ code {
 }
 
 .username {
-  color: rgb(82, 82, 82);
+  color: #767676;
 }

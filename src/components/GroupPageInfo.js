@@ -41,7 +41,7 @@ function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray 
                 {checkUserStatus(loggedInUser)}
             </div>
             <div className="user-info">
-                <h1 className="profile-h1">{groupData.group_name}</h1>
+                <h1 className="profile-h1 username">{groupData.group_name}</h1>
                 <div className="line info-panel"></div>
                 <h3 className="user-info label">Game</h3>
                 { groupData.group_about ? <p className="bio"><Link to={`/games/${groupData.game.id}`} className="game">{groupData.game.name}</Link></p> : <p className="bio">N/A</p>}
