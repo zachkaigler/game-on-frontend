@@ -63,7 +63,11 @@ code {
   display: flex;
   align-items: flex-end;
   position: relative;
-  top: 20%
+  /* top: 20% */
+}
+
+.icons:hover {
+  background-color: #eee5c4
 }
 
 .profile-badge {
