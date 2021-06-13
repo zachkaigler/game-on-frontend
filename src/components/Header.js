@@ -1,17 +1,45 @@
-import { NavLink } from "react-router-dom"
+import { useState } from "react"
+import { NavLink, useHistory } from "react-router-dom"
 import NotificationsModal from "./NotificationsModal"
 
-function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, setLoggedInUserReceivedRequests}) {
+function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, setLoggedInUserReceivedRequests, setSearchResults}) {
+    const [searchInput, setSearchInput] = useState("")
+    const history = useHistory()
 
     function handleClick() {
         localStorage.clear()
         setLoggedInUser(null)
     }
 
+    function handleSubmit(e) {
+        e.preventDefault()
+        setSearchInput("")
+        fetch("http://localhost:3000/search", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                query: searchInput
+            })
+        })
+        .then(resp => resp.json())
+        .then((results) => {
+            setSearchResults(results)
+            history.push("/searchresults")
+        })
+    }
+
     // Change links to all pages once made
     return (
         <div className="nav-header">
-            <img src="https://i.imgur.com/fwSD2s0.png" alt="game-on" style={{ height: "70px" }} />
+            <div className="nav-search-bar-container">
+                <img src="https://i.imgur.com/opV3Xj2.png" alt="logo" style={{ height: "65px"}}/>
+                <form className="search-form" onSubmit={handleSubmit}>
+                    <input className="search" placeholder="Search" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+                </form>
+            </div>
+            {/* <img src="https://i.imgur.com/fwSD2s0.png" alt="game-on" style={{ height: "70px" }} /> */}
             <div className="nav-btns-container">
                 { loggedInUser ? <span className="icons"><NavLink to="/games" className="nav-elements"><img src="https://i.imgur.com/PiITIgg.png" alt="games" style={{ height: "65px"}}/></NavLink></span> : null}
                 { loggedInUser ? <span className="icons"><NavLink to={"/discover"} className="nav-elements"><img src="https://i.imgur.com/gq5Ra6O.png" alt="find-groups" style={{ height: "65px"}}/></NavLink></span> : null}

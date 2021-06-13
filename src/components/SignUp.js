@@ -36,6 +36,9 @@ function SignUp({ onLogin }) {
                     alert(createdUser.error)
                     setUsername("")
                     setPassword("")
+                    setPassword2("")
+                    setEmail("")
+                    setPicture("")
                 } else {
                     localStorage.token = createdUser.token
                     onLogin(createdUser)

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import { Popup } from "semantic-ui-react"
 import KickMemberModal from "./KickMemberModal"
 
 function MembersInfo({groupData, membersArray, loggedInUser, setMembersArray, membershipsArray, setMembershipsArray}) {
@@ -11,13 +12,15 @@ function MembersInfo({groupData, membersArray, loggedInUser, setMembersArray, me
                 return (
                     <span className="admin-members" key={user.id}>
                             <KickMemberModal groupData={groupData} member={user} membershipsArray={membershipsArray} setMembershipsArray={setMembershipsArray} membersArray={membersArray} setMembersArray={setMembersArray}/>
-                            <NavLink to={`/profile/${user.id}`} key={user.id}><img className="profile-badge" src={user.profile_pic} alt={user.username} /></NavLink>
+                            {/* <NavLink to={`/profile/${user.id}`} key={user.id}><img className="profile-badge" src={user.profile_pic} alt={user.username} /></NavLink> */}
+                            <NavLink to={`/profile/${user.id}`} key={user.id}><Popup position="top center" content={user.username} trigger={<img className="profile-badge" src={user.profile_pic} alt={user.username} />} /></NavLink>
                     </span>
                 )
             })
         } else {
             memberIcons = membersArray.map((user) => {
-                return <NavLink to={`/profile/${user.id}`} key={user.id}><img className="profile-badge" src={user.profile_pic} alt={user.username} /></NavLink>
+                return <NavLink to={`/profile/${user.id}`} key={user.id}><Popup position="top center" content={user.username} trigger={<img className="profile-badge" src={user.profile_pic} alt={user.username} />} /></NavLink>
+                // return <NavLink to={`/profile/${user.id}`} key={user.id}><img className="profile-badge" src={user.profile_pic} alt={user.username} /></NavLink>
             })
         }
 
@@ -25,7 +28,8 @@ function MembersInfo({groupData, membersArray, loggedInUser, setMembersArray, me
             return (
                 <span className="admin" key={groupData.user.id}>
                     <span className="admin-star">🌟</span>
-                    <NavLink to={`/profile/${groupData.user.id}`} key={groupData.user.id}><img className="profile-badge admin-badge" src={groupData.user.profile_pic} alt={groupData.user.username} /></NavLink>
+                    <NavLink to={`/profile/${groupData.user.id}`} key={groupData.user.id}><Popup position="top center" content={`Group Admin: ${groupData.user.username}`} trigger={<img className="profile-badge admin-badge" src={groupData.user.profile_pic} alt={groupData.user.username} />} /></NavLink>
+                    {/* <NavLink to={`/profile/${groupData.user.id}`} key={groupData.user.id}><img className="profile-badge admin-badge" src={groupData.user.profile_pic} alt={groupData.user.username} /></NavLink> */}
                 </span>
             )
         }

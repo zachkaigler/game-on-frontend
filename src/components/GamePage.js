@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { NavLink } from "react-router-dom"
-import { Button } from "semantic-ui-react"
+import { Button, Popup } from "semantic-ui-react"
 import GroupCard from "./GroupCard"
 
 function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
@@ -59,7 +59,7 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
         }
         
         const userIcons = usersPlaying.map((user) => {
-            return <NavLink to={`/profile/${user.id}`} key={user.id}><img className="profile-badge" src={user.profile_pic} alt={user.username} /></NavLink>
+            return <NavLink to={`/profile/${user.id}`} key={user.id}><Popup position="bottom center" content={user.username} trigger={<img className="profile-badge" src={user.profile_pic} alt={user.username} />} /></NavLink>
         })
 
         const groups = gameData.groups.map((group) => {

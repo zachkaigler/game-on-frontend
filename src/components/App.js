@@ -10,6 +10,7 @@ import GroupPage from './GroupPage';
 import Header from './Header';
 import Login from './Login';
 import Profile from './Profile';
+import SearchResults from './SearchResults';
 import SignUp from './SignUp';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   const [loggedInUserGames, setLoggedInUserGames] = useState([])
   const [loggedInUserSentRequests, setLoggedInUserSentRequests] = useState([])
   const [loggedInUserReceivedRequests, setLoggedInUserReceivedRequests] = useState([])
+  const [searchResults, setSearchResults] = useState(null)
 
   function onLogin(userInfo) {
     setLoggedInUser(userInfo)
@@ -48,7 +50,8 @@ function App() {
       <Header loggedInUser={loggedInUser} 
               setLoggedInUser={setLoggedInUser} 
               loggedInUserReceivedRequests={loggedInUserReceivedRequests}
-              setLoggedInUserReceivedRequests={setLoggedInUserReceivedRequests}/>
+              setLoggedInUserReceivedRequests={setLoggedInUserReceivedRequests}
+              setSearchResults={setSearchResults}/>
       <Switch>
         <Route exact path="/">
           { loggedInUser ? <Redirect to={`/profile/${loggedInUser.id}`} /> : <Login onLogin={onLogin}/> }
@@ -81,6 +84,9 @@ function App() {
         </Route>
         <Route exact path="/discover">
           <FindGroups loggedInUser={loggedInUser} loggedInUserGames={loggedInUserGames}/>
+        </Route>
+        <Route exact path="/searchresults">
+          <SearchResults loggedInUser={loggedInUser} searchResults={searchResults} setSearchResults={setSearchResults}/>
         </Route>
       </Switch>
     </div>
