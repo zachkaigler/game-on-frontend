@@ -3,7 +3,7 @@ import { useParams } from "react-router"
 import GroupPageInfo from "./GroupPageInfo"
 import MembersInfo from "./MembersInfo"
 
-function GroupPage({ loggedInUser }) {
+function GroupPage({ loggedInUser, loggedInUserSentRequests, setLoggedInUserSentRequests }) {
     const [groupData, setGroupData] = useState({})
     const [membersArray, setMembersArray] = useState([])
     const [membershipsArray, setMembershipsArray] = useState([])
@@ -30,11 +30,12 @@ function GroupPage({ loggedInUser }) {
                                        membersArray={membersArray} 
                                        setMembersArray={setMembersArray} 
                                        membershipsArray={membershipsArray}
-                                       setMembershipsArray={setMembershipsArray}/>
+                                       setMembershipsArray={setMembershipsArray}
+                                       loggedInUserSentRequests={loggedInUserSentRequests}
+                                       setLoggedInUserSentRequests={setLoggedInUserSentRequests}/>
                         <MembersInfo groupData={groupData} 
                                      membersArray={membersArray}
                                      loggedInUser={loggedInUser}
-
                                      setMembersArray={setMembersArray} 
                                      membershipsArray={membershipsArray}
                                      setMembershipsArray={setMembershipsArray}/>

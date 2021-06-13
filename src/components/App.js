@@ -14,10 +14,14 @@ import SignUp from './SignUp';
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [loggedInUserGames, setLoggedInUserGames] = useState([])
+  const [loggedInUserSentRequests, setLoggedInUserSentRequests] = useState([])
+  const [loggedInUserReceivedRequests, setLoggedInUserReceivedRequests] = useState([])
 
   function onLogin(userInfo) {
     setLoggedInUser(userInfo)
     setLoggedInUserGames([...userInfo.games])
+    setLoggedInUserSentRequests([...userInfo.requests])
+    setLoggedInUserReceivedRequests([...userInfo.all_requests_to_my_groups])
   }
 
   useEffect(() => {
@@ -32,13 +36,18 @@ function App() {
       .then(data => {
           setLoggedInUser(data)
           setLoggedInUserGames([...data.games])
+          setLoggedInUserSentRequests([...data.requests])
+          setLoggedInUserReceivedRequests([...data.all_requests_to_my_groups])
       })
     }
   }, [])
-  
+
   return (
     <div className="App">
-      <Header loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
+      <Header loggedInUser={loggedInUser} 
+              setLoggedInUser={setLoggedInUser} 
+              loggedInUserReceivedRequests={loggedInUserReceivedRequests}
+              setLoggedInUserReceivedRequests={setLoggedInUserReceivedRequests}/>
       <Switch>
         <Route exact path="/">
           { loggedInUser ? <Redirect to={`/profile/${loggedInUser.id}`} /> : <Login onLogin={onLogin}/> }
@@ -59,7 +68,9 @@ function App() {
           <GamePage loggedInUser={loggedInUser} loggedInUserGames={loggedInUserGames} setLoggedInUserGames={setLoggedInUserGames}/>
         </Route>
         <Route exact path="/groups/:id">
-          <GroupPage loggedInUser={loggedInUser} />
+          <GroupPage loggedInUser={loggedInUser}
+                     loggedInUserSentRequests={loggedInUserSentRequests}
+                     setLoggedInUserSentRequests={setLoggedInUserSentRequests} />
         </Route>
         <Route exact path="/groups/:id/edit">
           <EditGroup loggedInUser={loggedInUser} />

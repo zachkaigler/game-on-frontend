@@ -1,7 +1,7 @@
 import { Button } from "semantic-ui-react";
 import { Link } from "react-router-dom"
 
-function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray, membershipsArray, setMembershipsArray }) {
+function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray, membershipsArray, setMembershipsArray, loggedInUserSentRequests, setLoggedInUserSentRequests }) {
 
     function handleLeaveGroup() {
         setMembersArray([...membersArray].filter((member) =>  member.id !== loggedInUser.id))
@@ -15,8 +15,32 @@ function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray,
         })
     }
 
+    function handleCancelRequest() {
+        const foundRequest = loggedInUserSentRequests.find((request) => request.user_id === loggedInUser.id && request.group_id === groupData.id)
+        setLoggedInUserSentRequests([...loggedInUserSentRequests].filter((request) => request !== foundRequest))
+
+        fetch(`http://localhost:3000/requests/${foundRequest.id}`, {
+            method: "DELETE",
+            headers: {"Authorization": localStorage.token}
+        })
+    }
+
     function handleRequestJoin() {
-        
+        fetch("http://localhost:3000/requests", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": loggedInUser.token
+            },
+            body: JSON.stringify({
+                user_id: loggedInUser.id,
+                group_id: groupData.id,
+                accepted: false,
+                read: false
+            })
+        })
+        .then(resp => resp.json())
+        .then((newRequest) => setLoggedInUserSentRequests([...loggedInUserSentRequests, newRequest]))
     }
 
     function checkUserStatus(loggedInUser) {
@@ -34,8 +58,10 @@ function GroupPageInfo({ groupData, loggedInUser, membersArray, setMembersArray,
                         <h3>Member</h3>
                         <Button className="profile-btn" onClick={handleLeaveGroup}>Leave Group</Button>
                     </div>)
-            } else if (groupData.open) {
+            } else if (groupData.open && !loggedInUserSentRequests.map((request) => request.group_id).includes(groupData.id)) {
                 return <Button className="profile-btn" onClick={handleRequestJoin}>Ask to Join</Button>
+            } else if (groupData.open && loggedInUserSentRequests.map((request) => request.group_id).includes(groupData.id)) {
+                return <Button className="profile-btn" onClick={handleCancelRequest}>Cancel Request</Button>
             } else {
                 return null
             }
