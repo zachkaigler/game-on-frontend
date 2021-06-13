@@ -94,7 +94,6 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
                 <div className="page-content">
                     <div className="game-header">
                         <h1 className="profile-h1 game-page">Users looking to play {gameData.name}</h1> 
-                        {/* { usersGames.includes(gameData.name) ? <Button onClick={destroyInterest}>Count me out</Button> : <Button onClick={createInterest}>I'm game!</Button> } */}
                         {checkLoggedInStatus(loggedInUser)}
                     </div>
                    <div className="line info-panel"></div>

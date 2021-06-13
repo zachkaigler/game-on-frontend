@@ -221,6 +221,10 @@ code {
   cursor: default
 }
 
+.kick {
+  cursor: pointer;
+}
+
 .admin-badge {
   border: solid;
   border-color: #ffe061;

@@ -14,8 +14,8 @@ function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, se
             <img src="https://i.imgur.com/fwSD2s0.png" alt="game-on" style={{ height: "70px" }} />
             <div className="nav-btns-container">
                 { loggedInUser ? <span className="icons"><NavLink to="/games" className="nav-elements"><img src="https://i.imgur.com/PiITIgg.png" alt="games" style={{ height: "65px"}}/></NavLink></span> : null}
-                { loggedInUser ? <span className="icons"><NavLink to={`/profile/${loggedInUser.id}`} className="nav-elements"><img src="https://i.imgur.com/gq5Ra6O.png" alt="find-groups" style={{ height: "65px"}}/></NavLink></span> : null}
-                { loggedInUser ? <span className="icons"><NavLink to={`/creategroup`} className="nav-elements"><img src="https://i.imgur.com/Mk9MGYC.png" alt="create-group" style={{ height: "65px"}}/></NavLink></span> : null}
+                { loggedInUser ? <span className="icons"><NavLink to={"/discover"} className="nav-elements"><img src="https://i.imgur.com/gq5Ra6O.png" alt="find-groups" style={{ height: "65px"}}/></NavLink></span> : null}
+                { loggedInUser ? <span className="icons"><NavLink to={"/creategroup"} className="nav-elements"><img src="https://i.imgur.com/Mk9MGYC.png" alt="create-group" style={{ height: "65px"}}/></NavLink></span> : null}
                 { loggedInUser ? <NotificationsModal loggedInUser={loggedInUser}
                                                      loggedInUserReceivedRequests={loggedInUserReceivedRequests}
                                                      setLoggedInUserReceivedRequests={setLoggedInUserReceivedRequests}/> : null}

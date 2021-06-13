@@ -27,11 +27,6 @@ function ProfileInfo({ userData, loggedInUser }) {
         <div className="profile-info">
             <div className="left-column">
                 <img src={userData.profile_pic} alt={userData.username} className="prof-pic"/>
-                {/* { userData.id === loggedInUser.id ? 
-                        <Button as={Link} to="/editprofile" className="profile-btn">Edit Profile</Button> 
-                        : 
-                        <Button className="profile-btn">Message</Button>
-                } */}
                 {renderButton(loggedInUser)}
             </div>
             <div className="user-info" id="group-info">

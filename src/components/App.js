@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom"
 import CreateGroup from './CreateGroup';
 import EditGroup from './EditGroup';
 import EditProfile from './EditProfile';
+import FindGroups from './FindGroups';
 import GamePage from './GamePage';
 import Games from './Games';
 import GroupPage from './GroupPage';
@@ -77,7 +78,9 @@ function App() {
         </Route>
         <Route exact path="/creategroup">
           { loggedInUser ? <CreateGroup loggedInUser={loggedInUser} /> : <Redirect to="/" />  }
-          {/* <CreateGroup loggedInUser={loggedInUser} /> */}
+        </Route>
+        <Route exact path="/discover">
+          <FindGroups loggedInUser={loggedInUser} loggedInUserGames={loggedInUserGames}/>
         </Route>
       </Switch>
     </div>

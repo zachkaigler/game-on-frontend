@@ -10,7 +10,6 @@ function MembersInfo({groupData, membersArray, loggedInUser, setMembersArray, me
             memberIcons = membersArray.map((user) => {
                 return (
                     <span className="admin-members" key={user.id}>
-                            {/* <span className="admin-star">🚫</span> */}
                             <KickMemberModal groupData={groupData} member={user} membershipsArray={membershipsArray} setMembershipsArray={setMembershipsArray} membersArray={membersArray} setMembersArray={setMembersArray}/>
                             <NavLink to={`/profile/${user.id}`} key={user.id}><img className="profile-badge" src={user.profile_pic} alt={user.username} /></NavLink>
                     </span>
@@ -21,10 +20,6 @@ function MembersInfo({groupData, membersArray, loggedInUser, setMembersArray, me
                 return <NavLink to={`/profile/${user.id}`} key={user.id}><img className="profile-badge" src={user.profile_pic} alt={user.username} /></NavLink>
             })
         }
-
-        // const memberIcons = membersArray.map((user) => {
-        //     return <NavLink to={`/profile/${user.id}`} key={user.id}><img className="profile-badge" src={user.profile_pic} alt={user.username} /></NavLink>
-        // })
 
         const adminIcon = (groupData) => {
             return (

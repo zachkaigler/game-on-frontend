@@ -17,21 +17,21 @@ function KickMemberModal({ groupData, member, membershipsArray, setMembershipsAr
     }
 
     return(
-        <Modal
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-      open={open}
-      size="small"
-      dimmer="blurring"
-      trigger={<span className="admin-star">🚫</span>}
-    >
-      <Modal.Content>
-        <div className="kick-modal">
-            <p>Kick <span className="bold">{member.username}</span> from <span className="bold">{groupData.group_name}</span>?</p>
-            <Button onClick={handleKick}>Yes</Button><Button onClick={() => setOpen(false)}>No</Button>
-        </div>
-      </Modal.Content>
-    </Modal>
+      <Modal
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        open={open}
+        size="small"
+        dimmer="blurring"
+        trigger={<span className="admin-star kick">🚫</span>}
+      >
+        <Modal.Content>
+          <div className="kick-modal">
+              <p>Kick <span className="bold">{member.username}</span> from <span className="bold">{groupData.group_name}</span>?</p>
+              <Button onClick={handleKick}>Yes</Button><Button onClick={() => setOpen(false)}>No</Button>
+          </div>
+        </Modal.Content>
+      </Modal>
     )
 }
 
