@@ -53,11 +53,11 @@ function NotificationsModal({ loggedInUser, loggedInUserReceivedRequests, setLog
             return (
                 <span className="icons">
                     <span className="notification-count"><Label circular color="red">{unreadRequests.length}</Label></span>
-                    <span id="notifications"><img src="https://i.imgur.com/sMSegvD.png" alt="notifications" style={{ height: "65px"}}/></span>
+                    <span id="notifications"><img src="https://i.imgur.com/ACNM8BV.png" alt="notifications"/></span>
                 </span>
             )
         } else {
-            return <span className="icons" id="notifications"><img src="https://i.imgur.com/sMSegvD.png" alt="notifications" style={{ height: "65px"}}/></span>
+            return <span className="icons" id="notifications"><img src="https://i.imgur.com/ACNM8BV.png" alt="notifications"/></span>
         }
     }
 

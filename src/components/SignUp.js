@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Form, Input, Button } from "semantic-ui-react";
-import { useHistory } from "react-router-dom"
+import { Form, Input } from "semantic-ui-react";
+import { useHistory, NavLink } from "react-router-dom"
 
 function SignUp({ onLogin }) {
     const [username, setUsername] = useState("")
@@ -49,15 +49,21 @@ function SignUp({ onLogin }) {
     }
 
     return (
-        <div className="signup">
-            <Form onSubmit={handleSubmit}>
-                <Input className="input" required placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/><br/>
-                <Input className="input" required placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
-                <Input className="input" required placeholder="Confirm Password" type="password" value={password2} onChange={(e) => setPassword2(e.target.value)}/><br/>
-                <Input className="input" required placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
-                <Input className="input" required placeholder="Profile Picture" type="url" value={picture} onChange={(e) => setPicture(e.target.value)}/><br/>
-                <Button>Create Account</Button>
-            </Form>
+        <div className="login-signup-page">
+            <div className="login-signup signup">
+                <Form onSubmit={handleSubmit}>
+                    <Input className="login-signup-input" required placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/><br/>
+                    <Input className="login-signup-input" required placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
+                    <Input className="login-signup-input" required placeholder="Confirm Password" type="password" value={password2} onChange={(e) => setPassword2(e.target.value)}/><br/>
+                    <Input className="login-signup-input" required placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/><br/>
+                    <Input className="login-signup-input" required placeholder="Profile Picture" type="url" value={picture} onChange={(e) => setPicture(e.target.value)}/><br/>
+                    <button className="login-signup-button">Create Account</button>
+                    <br/>
+                    <div className="back-to-login">
+                        <NavLink to="/">Back to Log In</NavLink>    
+                    </div>
+                </Form>
+            </div>
         </div>
     )
 }

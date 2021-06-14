@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Input, Button } from "semantic-ui-react";
+import { Form, Input } from "semantic-ui-react";
 import { NavLink, useHistory } from "react-router-dom"
 
 function Login({ onLogin }) {
@@ -33,14 +33,20 @@ function Login({ onLogin }) {
 
     if (!localStorage.token) {
        return (
-        <div className="login-form">
-            <Form onSubmit={handleSubmit}>
-                <Input className="input" placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/><br/>
-                <Input className="input" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
-                <Button>Log In</Button>
-                <h3>or</h3>
-                <NavLink to="/signup">Sign Up</NavLink>
-            </Form>        
+        <div className="login-signup-page">
+            <div className="login-signup">
+            <img src="https://i.imgur.com/GcgB1H9.png" alt="logo" />
+            <div className="line info-panel"></div>
+                <Form onSubmit={handleSubmit}>
+                    <Input className="login-signup-input" placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}/><br/>
+                    <Input className="login-signup-input" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
+                    <button className="login-signup-button">Log In</button>
+                    <div className="login-signup-links">
+                        <h3>or</h3>
+                        <NavLink to="/signup">Sign Up</NavLink>
+                    </div>
+                </Form>        
+            </div>
         </div>
         ) 
     } else {

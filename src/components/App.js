@@ -47,11 +47,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header loggedInUser={loggedInUser} 
+       { loggedInUser ? <Header loggedInUser={loggedInUser} 
               setLoggedInUser={setLoggedInUser} 
               loggedInUserReceivedRequests={loggedInUserReceivedRequests}
               setLoggedInUserReceivedRequests={setLoggedInUserReceivedRequests}
-              setSearchResults={setSearchResults}/>
+              setSearchResults={setSearchResults}/> : null }
       <Switch>
         <Route exact path="/">
           { loggedInUser ? <Redirect to={`/profile/${loggedInUser.id}`} /> : <Login onLogin={onLogin}/> }
