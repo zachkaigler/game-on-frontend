@@ -31,6 +31,8 @@ function App() {
     setLoggedInUserConversations([...userInfo.all_conversations])
   }
 
+  // console.log(loggedInUserConversations)
+
   useEffect(() => {
     if (localStorage.token) {
       fetch("http://localhost:3000/keep_logged_in", {
@@ -49,8 +51,6 @@ function App() {
       })
     }
   }, [])
-
-  // console.log(loggedInUserConversations)
 
   return (
     <div className="App">
@@ -96,10 +96,10 @@ function App() {
           <SearchResults loggedInUser={loggedInUser} searchResults={searchResults} setSearchResults={setSearchResults}/>
         </Route>
         <Route exact path="/conversations">
-          { loggedInUser ? <Conversations loggedInUser={loggedInUser} loggedInUserConversations={loggedInUserConversations}/> : <Redirect to="/" />}
+          { loggedInUser ? <Conversations loggedInUser={loggedInUser} loggedInUserConversations={loggedInUserConversations}/> : null}
         </Route>
         <Route exact path="/conversations/:id">
-          { loggedInUser ? <ConversationPage loggedInUser={loggedInUser}/> : null }
+          { loggedInUser ? <ConversationPage loggedInUser={loggedInUser} /> : null }
         </Route>
       </Switch>
     </div>

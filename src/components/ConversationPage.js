@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import { NavLink } from "react-router-dom"
+import { createConsumer } from "@rails/actioncable"
 
 function ConversationPage({ loggedInUser }) {
     const [messages, setMessages] = useState([])
@@ -21,6 +22,29 @@ function ConversationPage({ loggedInUser }) {
             setIsLoaded(true)
         })
     }, [params.id])
+
+    // console.log(messages)
+
+    useEffect(() => {
+        const cable = createConsumer("ws://localhost:3000/cable")
+        const paramsToSend = {
+            channel: "ConversationChannel",
+            id: params.id
+        }
+        const handlers = {
+            received(data) {
+                // console.log(data)
+                setMessages([...messages, data])
+            },
+            connected() {
+                console.log("connected")
+            },
+            disconnected() {
+                console.log("disconnected")
+            }
+        }
+        cable.subscriptions.create(paramsToSend, handlers)
+    }, [params.id, messages])
 
     if (isLoaded) {
 
@@ -66,8 +90,8 @@ function ConversationPage({ loggedInUser }) {
                     },
                     body: JSON.stringify(data)
                 })
-                .then(resp=>resp.json())
-                .then(msg => setMessages([...messages, msg]))
+                // .then(resp=>resp.json())
+                // .then(msg => setMessages([...messages, msg]))
             }
         }
 
