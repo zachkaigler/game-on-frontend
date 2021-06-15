@@ -345,7 +345,7 @@ code {
   font-style: normal;
   background-color: #eee5c4;
   margin-left: 5px;
-  border-radius: 5px;
+  border-radius: 30px;
   border: transparent;
   height: 70%;
   width: 300px
@@ -398,7 +398,8 @@ code {
 .login-signup-input {
   width: 65%;
   margin: 20px;
-  box-shadow: 0px 10px 10px rgba(223, 205, 161, 0.671);
+  box-shadow: 0px 0px 40px rgba(223, 205, 161, 0.671)
+  /* box-shadow: 0px 10px 10px rgba(223, 205, 161, 0.671); */
 }
 
 .login-signup-links{
@@ -443,4 +444,86 @@ code {
 
 .login-signup-button:hover {
   background: #e1d9ba;
+}
+
+.conversation-page{
+  height: 70em;
+}
+
+.messages-container {
+  padding-top: 30px;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  height: 90%;
+  overflow: auto
+}
+
+.sent-message { 
+  align-self: flex-end;
+}
+
+.sent-message-temp {
+  height: fit-content;
+  background-color: #f7d5b2;
+  border-radius: 30px;
+  padding: 20px;
+  font-size: 20px;
+  font-family: 'Prompt', sans-serif;
+}
+
+.receieved-message {
+  align-self: flex-start;
+}
+
+.receieved-message-temp {
+  height: fit-content;
+  background-color: #ebebeb;
+  border-radius: 30px;
+  padding: 20px;
+  font-size: 20px;
+  font-family: 'Prompt', sans-serif;
+}
+
+.message-input {
+  width: 80%;
+  height: 60px;
+  box-shadow: 0px 0px 40px rgba(181, 181, 181, 0.671);
+  border: none;
+  border-radius: 30px;
+  font-size: 20px;
+  font-family: 'Prompt', sans-serif;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.message-input:focus {
+  outline: none;
+}
+
+.message-button {
+  height: 60px;
+  width: 60px;
+  border: none;
+  background-color: #f7d5b2;
+  color: white;
+  border-radius: 50%;
+  padding: 13px;
+  margin: 15px
+}
+
+.message-button:hover {
+  background-color: #e4c5a5;
+}
+
+.message-form {
+  margin-left: 11%;
+}
+
+.sent-message, .receieved-message {
+  display: flex;
+  align-items: center;
 }

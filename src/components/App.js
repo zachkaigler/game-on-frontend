@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Switch, Route, Redirect } from "react-router-dom"
+import ConversationPage from './ConversationPage';
+import Conversations from './Conversations';
 import CreateGroup from './CreateGroup';
 import EditGroup from './EditGroup';
 import EditProfile from './EditProfile';
@@ -18,6 +20,7 @@ function App() {
   const [loggedInUserGames, setLoggedInUserGames] = useState([])
   const [loggedInUserSentRequests, setLoggedInUserSentRequests] = useState([])
   const [loggedInUserReceivedRequests, setLoggedInUserReceivedRequests] = useState([])
+  const [loggedInUserConversations, setLoggedInUserConversations] = useState([])
   const [searchResults, setSearchResults] = useState(null)
 
   function onLogin(userInfo) {
@@ -25,6 +28,7 @@ function App() {
     setLoggedInUserGames([...userInfo.games])
     setLoggedInUserSentRequests([...userInfo.requests])
     setLoggedInUserReceivedRequests([...userInfo.all_requests_to_my_groups])
+    setLoggedInUserConversations([...userInfo.all_conversations])
   }
 
   useEffect(() => {
@@ -41,9 +45,12 @@ function App() {
           setLoggedInUserGames([...data.games])
           setLoggedInUserSentRequests([...data.requests])
           setLoggedInUserReceivedRequests([...data.all_requests_to_my_groups])
+          setLoggedInUserConversations([...data.all_conversations])
       })
     }
   }, [])
+
+  // console.log(loggedInUserConversations)
 
   return (
     <div className="App">
@@ -87,6 +94,12 @@ function App() {
         </Route>
         <Route exact path="/searchresults">
           <SearchResults loggedInUser={loggedInUser} searchResults={searchResults} setSearchResults={setSearchResults}/>
+        </Route>
+        <Route exact path="/conversations">
+          { loggedInUser ? <Conversations loggedInUser={loggedInUser} loggedInUserConversations={loggedInUserConversations}/> : <Redirect to="/" />}
+        </Route>
+        <Route exact path="/conversations/:id">
+          { loggedInUser ? <ConversationPage loggedInUser={loggedInUser}/> : null }
         </Route>
       </Switch>
     </div>

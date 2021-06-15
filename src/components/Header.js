@@ -30,7 +30,6 @@ function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, se
         })
     }
 
-    // Change links to all pages once made
     return (
         <div className="nav-header">
             <div className="nav-search-bar-container">
@@ -39,7 +38,6 @@ function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, se
                     <input className="search" placeholder="Search" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
                 </form>
             </div>
-            {/* <img src="https://i.imgur.com/fwSD2s0.png" alt="game-on" style={{ height: "70px" }} /> */}
             <div className="nav-btns-container">
                 { loggedInUser ? <span className="icons"><NavLink to="/games" className="nav-elements"><img src="https://i.imgur.com/ujLLXhR.png" alt="games"/></NavLink></span> : null}
                 { loggedInUser ? <span className="icons"><NavLink to={"/discover"} className="nav-elements"><img src="https://i.imgur.com/wQ2XwBf.png" alt="find-groups" /></NavLink></span> : null}
@@ -47,7 +45,7 @@ function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, se
                 { loggedInUser ? <NotificationsModal loggedInUser={loggedInUser}
                                                      loggedInUserReceivedRequests={loggedInUserReceivedRequests}
                                                      setLoggedInUserReceivedRequests={setLoggedInUserReceivedRequests}/> : null}
-                { loggedInUser ? <span className="icons"><NavLink to={`/profile/${loggedInUser.id}`} className="nav-elements"><img src="https://i.imgur.com/ovjG3p5.png" alt="messages" /></NavLink></span> : null}
+                { loggedInUser ? <span className="icons"><NavLink to={`/conversations`} className="nav-elements"><img src="https://i.imgur.com/ovjG3p5.png" alt="messages" /></NavLink></span> : null}
                 { loggedInUser ? <NavLink to={`/profile/${loggedInUser.id}`}><img id="profile-badge-nav" src={loggedInUser.profile_pic} alt={loggedInUser.username} /></NavLink> : null}
                 { loggedInUser ? <NavLink to="/" onClick={handleClick} className="nav-elements log">Log Out</NavLink> : <NavLink to="/" className="nav-elements log">Log In</NavLink>}
             </div>
