@@ -28,14 +28,12 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
             let foundInterest = interests.find((interest) => {
                 return interest.user_id === loggedInUser.id
             })
-
             setLoggedInUserGames([...loggedInUserGames.filter((game) => {
                 return game.id !== gameData.id
             })])
             setUsersPlaying([...usersPlaying.filter((user) => {
                 return user.id !== loggedInUser.id
             })])
-
             fetch(`http://localhost:3000/interests/${foundInterest.id}`, {
                 method: "DELETE",
                 headers: {"Authorization": localStorage.token}
