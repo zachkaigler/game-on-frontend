@@ -29,7 +29,7 @@ function ConversationPage({ loggedInUser }) {
     const cable = useRef()
 
     useEffect(() => {
-        if(!cable.current) {
+        if (!cable.current) {
             cable.current = createConsumer("ws://localhost:3000/cable")
         }
         const paramsToSend = {
@@ -60,7 +60,14 @@ function ConversationPage({ loggedInUser }) {
                 cable.current = null
             }
         }
-        cable.current.subscriptions.create(paramsToSend, handlers)
+        console.log("subbing to ", params.id)
+        const subscription = cable.current.subscriptions.create(paramsToSend, handlers)
+
+        return function cleanup() {
+            console.log("unsubbing from ", params.id)
+            cable.current = null
+            subscription.unsubscribe()
+        }
     }, [params.id, messages])
 
     // useEffect(() => {
