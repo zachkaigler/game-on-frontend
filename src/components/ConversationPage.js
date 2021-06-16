@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router"
 import { NavLink } from "react-router-dom"
 import { createConsumer } from "@rails/actioncable"
@@ -23,28 +23,65 @@ function ConversationPage({ loggedInUser }) {
         })
     }, [params.id])
 
-    // console.log(messages)
+    console.log(messages)
+    // console.log(params.id)
+    
+    const cable = useRef()
 
     useEffect(() => {
-        const cable = createConsumer("ws://localhost:3000/cable")
+        if(!cable.current) {
+            cable.current = createConsumer("ws://localhost:3000/cable")
+        }
         const paramsToSend = {
             channel: "ConversationChannel",
             id: params.id
         }
         const handlers = {
             received(data) {
-                // console.log(data)
-                setMessages([...messages, data])
+                console.log(data)
+
+                const pkg = {
+                    content: data.message.content,
+                    conversation_id: data.message.conversation_id,
+                    id: data.message.id,
+                    read: false,
+                    user_id: data.message.user_id,
+                    user_prof_pic: data.user_prof_pic,
+                    user_username: data.user_username
+                }
+
+                setMessages([...messages, pkg])
             },
             connected() {
                 console.log("connected")
             },
             disconnected() {
                 console.log("disconnected")
+                cable.current = null
             }
         }
-        cable.subscriptions.create(paramsToSend, handlers)
+        cable.current.subscriptions.create(paramsToSend, handlers)
     }, [params.id, messages])
+
+    // useEffect(() => {
+    //     const cable = createConsumer("ws://localhost:3000/cable")
+    //     const paramsToSend = {
+    //         channel: "ConversationChannel",
+    //         id: params.id
+    //     }
+    //     const handlers = {
+    //         received(data) {
+    //             setMessages([...messages, data])
+    //         },
+    //         connected() {
+    //             console.log("connected")
+    //         },
+    //         disconnected() {
+    //             console.log("disconnected")
+    //         }
+    //     }
+    //     cable.subscriptions.create(paramsToSend, handlers)
+    // }, [params.id, messages])
 
     if (isLoaded) {
 
