@@ -1,14 +1,59 @@
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { Button } from "semantic-ui-react"
 
-function ProfileInfo({ userData, loggedInUser }) {
+function ProfileInfo({ userData, loggedInUser, loggedInUserConversations, setLoggedInUserConversations }) {
+    const history = useHistory()
 
     let games = null
-
+    console.log(loggedInUserConversations)
     if (userData.games.length !== 0) {
         games = userData.games.map((game) => {
             return <Link to={`/games/${game.id}`}key={game.id} className="game">{game.name}</Link>
         }) 
+    }
+    // console.log(loggedInUserConversations)
+    function handleClick() {
+        const foundConvo = loggedInUserConversations.find((convo) => {
+            if (convo.convo.user_a_id === loggedInUser.id && convo.convo.user_b_id === userData.id) {
+                return convo
+            } else if (convo.convo.user_b_id === loggedInUser.id && convo.convo.user_a_id === userData.id) {
+                return convo
+            } else {
+                return null
+            }
+        })
+
+        if (foundConvo) {
+            console.log(`Redirecting to conversation ${foundConvo.convo.id}!`)
+            history.push(`/conversations/${foundConvo.convo.id}`)
+        } else {
+            console.log("Creating new conversation!")
+            fetch("http://localhost:3000/conversations", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    "Authorization": loggedInUser.token
+                },
+                body: JSON.stringify({
+                    user_a_id: loggedInUser.id,
+                    user_b_id: userData.id
+                })
+            })
+            .then(resp => resp.json())
+            .then(newConvo => {
+
+                const data = {
+                    convo: newConvo,
+                    user_a_pic: loggedInUser.id,
+                    user_a_username: loggedInUser.username,
+                    user_b_pic: userData.profile_pic,
+                    user_b_username: userData.username
+                }
+
+                setLoggedInUserConversations([...loggedInUserConversations, data])
+                history.push(`/conversations/${newConvo.id}`)
+            })
+        }
     }
 
     function renderButton(loggedInUser) {
@@ -16,7 +61,7 @@ function ProfileInfo({ userData, loggedInUser }) {
             if (userData.id === loggedInUser.id ) {
                 return <Button as={Link} to="/editprofile" className="profile-btn">Edit Profile</Button> 
             } else {
-                return <Button className="profile-btn">Message</Button>
+                return <Button className="profile-btn" onClick={handleClick}>Message</Button>
             }
         } else {
             return null

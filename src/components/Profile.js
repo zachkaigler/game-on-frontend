@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import GroupsInfo from "./GroupsInfo"
 import ProfileInfo from "./ProfileInfo"
 
-function Profile({ loggedInUser }) {
+function Profile({ loggedInUser, loggedInUserConversations, setLoggedInUserConversations }) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [userData, setUserData] = useState({})
     const params = useParams()
@@ -21,7 +21,7 @@ function Profile({ loggedInUser }) {
         return (
             <div className="page-container">
                 <div className="page-content">
-                    <ProfileInfo userData={userData} loggedInUser={loggedInUser}/>
+                    <ProfileInfo userData={userData} loggedInUser={loggedInUser} loggedInUserConversations={loggedInUserConversations} setLoggedInUserConversations={setLoggedInUserConversations}/>
                     <GroupsInfo userData={userData}/>
                 </div>
             </div>

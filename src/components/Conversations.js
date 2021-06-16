@@ -24,7 +24,7 @@ function Conversations({loggedInUser, loggedInUserConversations}) {
         <div className="page-container">
             <div className="page-content">
                 <div className="conversations-list">
-                    {conversations}
+                    {loggedInUserConversations.length === 0 ? <p>None yet. Hit someone up!</p> : conversations }
                 </div>
             </div>
         </div>
