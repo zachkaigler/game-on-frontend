@@ -6,6 +6,7 @@ import { createConsumer } from "@rails/actioncable"
 function ConversationPage({ loggedInUser }) {
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState("")
+    const [otherUser, setOtherUser] = useState("")
     const [isLoaded, setIsLoaded] = useState(false)
     const params = useParams()
 
@@ -18,10 +19,17 @@ function ConversationPage({ loggedInUser }) {
         })
         .then(resp => resp.json())
         .then((data) => {
+
+            if (data.user_a_id === loggedInUser.id) {
+                setOtherUser(data.user_b.username)
+            } else {
+                setOtherUser(data.user_a.username)
+            }
+
             setMessages(data.messages)
             setIsLoaded(true)
         })
-    }, [params.id])
+    }, [params.id, loggedInUser.id])
 
     console.log(messages)
     // console.log(params.id)
@@ -142,6 +150,8 @@ function ConversationPage({ loggedInUser }) {
         return(
             <div className="page-container conversation-page">
                 <div className="page-content conversation-page">
+                    <h1 className="profile-h1 username" id="chat">{otherUser}</h1>
+                    <div className="line info-panel"></div>
                     <div className="messages-container">
                         {messageBubbles}
                     </div>

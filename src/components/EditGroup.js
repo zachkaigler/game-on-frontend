@@ -11,6 +11,7 @@ function EditGroup({ loggedInUser }) {
     const [groupTime, setGroupTime] = useState("")
     const [open, setOpen] = useState(true)
     const [groupImage, setGroupImage] = useState("")
+    const [groupNameHeader, setGroupNameHeader] = useState("")
     const [isLoaded, setIsLoaded] = useState(false)
     const params = useParams()
     const history = useHistory()
@@ -25,6 +26,7 @@ function EditGroup({ loggedInUser }) {
         .then(resp => resp.json())
         .then((data) => {
             setGroupName(data.group_name)
+            setGroupNameHeader(data.group_name)
             setGroupAbout(data.group_about)
             setGroupLocation(data.group_location)
             const dateSplit = data.group_time.split(", ")
@@ -253,22 +255,28 @@ function EditGroup({ loggedInUser }) {
         return (
             <div className="page-container">
                 <div className="page-content">
+                    <h1 className="profile-h1 username">Edit {groupNameHeader}</h1>
                     <div className="edit-group">
-                        <Form onSubmit={handleSubmit}>
-                            <Label>Group Name</Label><br/>
-                                <Input required className="input" type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)}/><br/>
-                            <Label>About</Label><br/>
+                    <div className="line info-panel"></div>
+                    <div className="form-container">
+                        <Form onSubmit={handleSubmit} className="form">
+                            <Label className="label">Group Name</Label><br/>
+                                <Input required fluid className="input" type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)}/><br/>
+                            <Label className="label">About</Label><br/>
                                 <TextArea required name="About" className="input" maxLength="250" type="text" value={groupAbout} onChange={(e) => setGroupAbout(e.target.value)}/><br/>
-                            <Label>Location</Label><br/>
-                                <Input required className="input" type="text" value={groupLocation} onChange={(e) => setGroupLocation(e.target.value)}/><br/>
-                            <Label>Time</Label><br/>
-                                <Dropdown required fluid selection options={days} onChange={(e, r) => setGroupDay(r.value)} value={groupDay}/> <Dropdown fluid selection options={times} onChange={(e, r) => setGroupTime(r.value)} value={groupTime}/><br/>
-                            <Label>Accepting new members?</Label>
+                            <Label className="label" id="location-label">Location</Label><br/>
+                                <Input required fluid className="input" type="text" value={groupLocation} onChange={(e) => setGroupLocation(e.target.value)}/><br/>
+                            <Label className="label">Time</Label><br/>
+                            <div className="dropdown-container">
+                                <Dropdown required selection className="dropdown" options={days} onChange={(e, r) => setGroupDay(r.value)} value={groupDay}/> <Dropdown selection className="dropdown" options={times} onChange={(e, r) => setGroupTime(r.value)} value={groupTime}/><br/>
+                            </div>
+                            <Label className="label" id="new-members-label">Accepting new members?</Label>
                                 <Dropdown required fluid selection options={trueFalse} onChange={(e, r) => setOpen(r.value)} value={open}/><br/>
-                            <Label>Group Picture</Label><br/>
-                                <Input required className="input" placeholder="Profile Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/>
+                            <Label className="label">Group Picture</Label><br/>
+                                <Input required fluid className="input" placeholder="Profile Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/>
                             <Button>Save Changes</Button>
                         </Form>
+                    </div>
                             <Button className="delete" onClick={handleDelete}>Delete Group</Button><br />
                             <Button className="cancel" as={Link} to={`/groups/${params.id}`}>Cancel</Button>
                     </div> 

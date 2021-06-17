@@ -4,14 +4,24 @@ import { Button } from "semantic-ui-react"
 function ProfileInfo({ userData, loggedInUser, loggedInUserConversations, setLoggedInUserConversations }) {
     const history = useHistory()
 
+    function commaPlacer(arr) {
+        return arr.map((e) => {
+          if (arr.indexOf(e) !== arr.length - 1) {
+            return ({ name: `${e.name}, `, id: e.id})
+          } else {
+            return ({ name: e.name, id: e.id})
+          }
+        })
+      }
+
     let games = null
-    console.log(loggedInUserConversations)
+
     if (userData.games.length !== 0) {
-        games = userData.games.map((game) => {
-            return <Link to={`/games/${game.id}`}key={game.id} className="game">{game.name}</Link>
-        }) 
+        games = commaPlacer(userData.games).map((game) => {
+                return <Link to={`/games/${game.id}`}key={game.id} className="game">{game.name}</Link>
+            }) 
     }
-    // console.log(loggedInUserConversations)
+   
     function handleClick() {
         const foundConvo = loggedInUserConversations.find((convo) => {
             if (convo.convo.user_a_id === loggedInUser.id && convo.convo.user_b_id === userData.id) {

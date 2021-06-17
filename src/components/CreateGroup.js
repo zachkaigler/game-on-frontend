@@ -245,17 +245,23 @@ function CreateGroup({loggedInUser}) {
             <div className="page-container">
                 <div className="page-content">
                 <div className="edit-group">
-                        <Form onSubmit={handleSubmit}>
-                            <Input required className="input" placeholder="Group Name" type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)}/><br/>
-                            <Dropdown required fluid selection placeholder="Game" options={gameOptions} onChange={(e, r) => setSelectedGame(r.value)} value={selectedGame}/><br/>
-                            <TextArea required placeholder="About" className="input" maxLength="250" type="text" value={groupAbout} onChange={(e) => setGroupAbout(e.target.value)}/><br/>
-                            <Input required className="input" placeholder="Location" type="text" value={groupLocation} onChange={(e) => setGroupLocation(e.target.value)}/><br/>
-                            <Dropdown required fluid selection placeholder="Day" options={days} onChange={(e, r) => setGroupDay(r.value)} value={groupDay}/> <Dropdown fluid selection placeholder="Time" options={times} onChange={(e, r) => setGroupTime(r.value)} value={groupTime}/><br/>
-                            <Dropdown required fluid selection placeholder="Accepting new members?" options={trueFalse} onChange={(e, r) => setOpen(r.value)} value={open}/><br/>
-                            <Input required className="input" placeholder="Group Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/>
-                            <Button>Create Group</Button>
-                        </Form>
-                        <Button className="cancel" as={Link} to={`/profile/${loggedInUser.id}`}>Cancel</Button>
+                    <h1 className="profile-h1 username">New Group</h1>
+                    <div className="line info-panel"></div>
+                    <div className="form-container">
+                    <Form onSubmit={handleSubmit} className="form">
+                        <Input required fluid className="input" placeholder="Group Name" type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)}/><br/>
+                        <Dropdown required fluid selection placeholder="Game" options={gameOptions} onChange={(e, r) => setSelectedGame(r.value)} value={selectedGame}/><br/>
+                        <TextArea required placeholder="About" className="input" maxLength="250" type="text" value={groupAbout} onChange={(e) => setGroupAbout(e.target.value)}/><br/>
+                        <Input required fluid className="input" placeholder="Location" id="location" type="text" value={groupLocation} onChange={(e) => setGroupLocation(e.target.value)}/><br/>
+                        <div className="dropdown-container">
+                            <Dropdown required selection className="dropdown" placeholder="Day" options={days} onChange={(e, r) => setGroupDay(r.value)} value={groupDay}/> <Dropdown selection className="dropdown" placeholder="Time" options={times} onChange={(e, r) => setGroupTime(r.value)} value={groupTime}/><br/>
+                        </div>
+                        <Dropdown required className="is-open" fluid selection placeholder="Accepting new members?" options={trueFalse} onChange={(e, r) => setOpen(r.value)} value={open}/><br/>
+                        <Input required fluid className="input" placeholder="Group Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/>
+                        <Button id="create">Create Group</Button>
+                    </Form>
+                    <Button className="cancel" as={Link} to={`/profile/${loggedInUser.id}`}>Cancel</Button>
+                    </div>
                     </div> 
                 </div>
             </div>
