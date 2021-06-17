@@ -401,6 +401,10 @@ code {
   align-self: center;
 }
 
+#sign-up {
+  margin-top: -30px;
+}
+
 .login-signup img {
   width: 90%;
   margin-top: 5%;
@@ -408,6 +412,7 @@ code {
 }
 
 .login-signup div.line {
+  margin-top: 4%;
   margin-bottom: 20%;
 }
 
@@ -421,7 +426,7 @@ code {
 .login-signup-links{
   font-family: 'Prompt', sans-serif;
   color: #ff860b;
-  margin-top: 13%;
+  margin-top: 25%;
 }
 
 .login-signup-links h3 {
@@ -443,6 +448,43 @@ code {
 
 .signup {
   padding-top: 3.5%;
+}
+
+.upload-container {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 30px ;
+  background-color: white;
+  width: 65%;
+  text-align: center;
+  justify-content: center;
+  box-shadow: 0px 0px 40px rgba(223, 205, 161, 0.671);
+  margin-left: 17%;
+  border-radius: 5px;
+  border: solid;
+  border-width: 1px;
+  color: #c7c7c7;
+  border-color: #dededf;
+  height: 150px;
+  cursor: pointer;
+}
+
+.upload-pic {
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-pic img {
+  height: 80px;
+  width: 80px;
+}
+
+.new-file {
+  color: black
+}
+
+input[type="file"] {
+  display: none;
 }
 
 .login-signup-button {
