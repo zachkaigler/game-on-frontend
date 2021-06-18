@@ -17,6 +17,7 @@ import SignUp from './SignUp';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null)
+  const [loggedInUserProfPic, setLoggedInUserProfPic] = useState("")
   const [loggedInUserGames, setLoggedInUserGames] = useState([])
   const [loggedInUserSentRequests, setLoggedInUserSentRequests] = useState([])
   const [loggedInUserReceivedRequests, setLoggedInUserReceivedRequests] = useState([])
@@ -25,6 +26,7 @@ function App() {
 
   function onLogin(userInfo) {
     setLoggedInUser(userInfo)
+    setLoggedInUserProfPic(userInfo.profile_pic)
     setLoggedInUserGames([...userInfo.games])
     setLoggedInUserSentRequests([...userInfo.requests])
     setLoggedInUserReceivedRequests([...userInfo.all_requests_to_my_groups])
@@ -44,6 +46,7 @@ function App() {
       .then(resp => resp.json())
       .then(data => {
           setLoggedInUser(data)
+          setLoggedInUserProfPic(data.profile_pic)
           setLoggedInUserGames([...data.games])
           setLoggedInUserSentRequests([...data.requests])
           setLoggedInUserReceivedRequests([...data.all_requests_to_my_groups])
@@ -58,7 +61,8 @@ function App() {
               setLoggedInUser={setLoggedInUser} 
               loggedInUserReceivedRequests={loggedInUserReceivedRequests}
               setLoggedInUserReceivedRequests={setLoggedInUserReceivedRequests}
-              setSearchResults={setSearchResults}/> : null }
+              setSearchResults={setSearchResults}
+              loggedInUserProfPic={loggedInUserProfPic}/> : null }
       <Switch>
         <Route exact path="/">
           { loggedInUser ? <Redirect to={`/profile/${loggedInUser.id}`} /> : <Login onLogin={onLogin}/> }
@@ -70,7 +74,7 @@ function App() {
           <SignUp onLogin={onLogin}/>
         </Route>
         <Route exact path="/editprofile">
-          <EditProfile loggedInUser={loggedInUser}/>
+          <EditProfile loggedInUser={loggedInUser} setLoggedInUserProfPic={setLoggedInUserProfPic}/>
         </Route>
         <Route exact path="/games">
           <Games />
@@ -99,7 +103,7 @@ function App() {
           { loggedInUser ? <Conversations loggedInUser={loggedInUser} loggedInUserConversations={loggedInUserConversations}/> : null}
         </Route>
         <Route exact path="/conversations/:id">
-          { loggedInUser ? <ConversationPage loggedInUser={loggedInUser} /> : null }
+          { loggedInUser ? <ConversationPage loggedInUser={loggedInUser} loggedInUserProfPic={loggedInUserProfPic}/> : null }
         </Route>
       </Switch>
     </div>

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Form, Input, Button, TextArea, Label } from "semantic-ui-react";
 import { Redirect, useHistory, Link } from "react-router-dom"
+// import ChangeProfilePicModal from "./ChangeProfilePicModal";
+import ChangePhotoModal from "./ChangePhotoModal";
 
-function EditProfile( {loggedInUser} ) {
+function EditProfile( {loggedInUser, setLoggedInUserProfPic} ) {
     const [bio, setBio] = useState("")
     const [location, setLocation] = useState("")
-    const [picture, setPicture] = useState("")
+    // const [picture, setPicture] = useState("")
     const history = useHistory()
     
     useEffect(() => {
@@ -20,46 +22,50 @@ function EditProfile( {loggedInUser} ) {
             .then(data => {
                 setBio(data.bio)
                 setLocation(data.location)
-                setPicture(data.profile_pic)
+                // setPicture(data.profile_pic)
             })
         }
     }, [loggedInUser])
     
-    function handleSubmit(e) {
-        e.preventDefault()
-        fetch(`http://localhost:3000/users/${loggedInUser.id}`, {
-            method: "PATCH",
-            headers: {
-                "content-type": "application/json",
-                "Authorization": loggedInUser.token
-            },
-            body: JSON.stringify({
-                bio: bio,
-                location: location,
-                profile_pic: picture
-            })
-        })
-        .then(resp => resp.json())
-        .then((updatedUser) => {
-            // console.log(updatedUser)
-            history.push(`/profile/${loggedInUser.id}`)
-        })
-    }
-
+    
     if (loggedInUser) {
+        function handleSubmit(e) {
+            e.preventDefault()
+            fetch(`http://localhost:3000/users/${loggedInUser.id}`, {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                    "Authorization": loggedInUser.token
+                },
+                body: JSON.stringify({
+                    bio: bio,
+                    location: location,
+                    // profile_pic: picture
+                })
+            })
+            .then(resp => resp.json())
+            .then((updatedUser) => {
+                // console.log(updatedUser)
+                history.push(`/profile/${loggedInUser.id}`)
+            })
+        }
+        
         return(
             <div className="page-container">
                 <div className="page-content">
-                    <div className="edit-profile">
+                <h1 className="profile-h1 username">Edit Profile</h1>
+                <div className="line info-panel"></div>
+                    <div className="edit-group">
+                    <div className="form-container">
                         <Form onSubmit={handleSubmit}>
-                            <Label>Bio</Label>
+                            <Label className="label">Bio</Label>
                             <TextArea name="Bio" className="input" maxLength="250" type="text" value={bio} onChange={(e) => setBio(e.target.value)}/><br/>
-                            <Label>Location</Label><br/>
-                            <Input className="input" type="text" value={location} onChange={(e) => setLocation(e.target.value)}/><br/>
-                            <Label>Profile Picture</Label><br/>
-                            <Input className="input" placeholder="Profile Picture" type="url" value={picture} onChange={(e) => setPicture(e.target.value)}/><br/>
+                            <Label className="label" id="location-label">Location</Label><br/>
+                            <Input fluid className="input" type="text" value={location} onChange={(e) => setLocation(e.target.value)}/><br/>
                             <Button>Save Changes</Button><br/>
                         </Form>
+                        </div>
+                            <ChangePhotoModal flag="profile" loggedInUser={loggedInUser} setLoggedInUserProfPic={setLoggedInUserProfPic}/> <br/> 
                             <Button className="cancel" as={Link} to={`/profile/${loggedInUser.id}`}>Cancel</Button>
                     </div>
                 </div>

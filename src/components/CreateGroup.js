@@ -13,6 +13,7 @@ function CreateGroup({loggedInUser}) {
     const [open, setOpen] = useState("")
     const [groupImage, setGroupImage] = useState("")
     const [selectedGame, setSelectedGame] = useState("")
+    const [filename, setFilename] = useState("Upload Photo")
     const [isLoaded, setIsLoaded] = useState(false)
     const history = useHistory()
 
@@ -27,35 +28,68 @@ function CreateGroup({loggedInUser}) {
 
     if (isLoaded) {
 
+        function handleOnChange(e) {
+            setGroupImage(e.target.files[0])
+            setFilename(e.target.files[0].name)
+        }
+
         function handleSubmit(e) {
             e.preventDefault()
 
             let combinedTime = [groupDay, groupTime].join(", ") 
 
-            let data = {
-                group_name: groupName,
-                group_about: groupAbout,
-                group_location: groupLocation,
-                group_time: combinedTime,
-                open: open,
-                group_image: groupImage,
-                game_id: selectedGame,
-                user_id: loggedInUser.id
-            }
+            const form = new FormData()
+            form.append("group_name", groupName)
+            form.append("group_about", groupAbout)
+            form.append("group_location", groupLocation,)
+            form.append("group_time", combinedTime)
+            form.append("open", open)
+            form.append("group_image", groupImage)
+            form.append("game_id", selectedGame)
+            form.append("user_id", loggedInUser.id)
 
             fetch("http://localhost:3000/groups", {
                 method: "POST",
                 headers: {
-                    "content-type": "application/json",
                     "Authorization": loggedInUser.token
                 },
-                body: JSON.stringify(data)
+                body: form
             })
             .then(resp => resp.json())
             .then(newGroup => {
                 history.push(`/groups/${newGroup.id}`)
             })
         }
+
+        // function handleSubmit(e) {
+        //     e.preventDefault()
+
+        //     let combinedTime = [groupDay, groupTime].join(", ") 
+
+        //     let data = {
+        //         group_name: groupName,
+        //         group_about: groupAbout,
+        //         group_location: groupLocation,
+        //         group_time: combinedTime,
+        //         open: open,
+        //         group_image: groupImage,
+        //         game_id: selectedGame,
+        //         user_id: loggedInUser.id
+        //     }
+
+        //     fetch("http://localhost:3000/groups", {
+        //         method: "POST",
+        //         headers: {
+        //             "content-type": "application/json",
+        //             "Authorization": loggedInUser.token
+        //         },
+        //         body: JSON.stringify(data)
+        //     })
+        //     .then(resp => resp.json())
+        //     .then(newGroup => {
+        //         history.push(`/groups/${newGroup.id}`)
+        //     })
+        // }
 
         const gameOptions = games.map(game => {
             return (
@@ -244,9 +278,9 @@ function CreateGroup({loggedInUser}) {
         return (
             <div className="page-container">
                 <div className="page-content">
+                <h1 className="profile-h1 username">New Group</h1>
+                <div className="line info-panel"></div>
                 <div className="edit-group">
-                    <h1 className="profile-h1 username">New Group</h1>
-                    <div className="line info-panel"></div>
                     <div className="form-container">
                     <Form onSubmit={handleSubmit} className="form">
                         <Input required fluid className="input" placeholder="Group Name" type="text" value={groupName} onChange={(e) => setGroupName(e.target.value)}/><br/>
@@ -257,7 +291,13 @@ function CreateGroup({loggedInUser}) {
                             <Dropdown required selection className="dropdown" placeholder="Day" options={days} onChange={(e, r) => setGroupDay(r.value)} value={groupDay}/> <Dropdown selection className="dropdown" placeholder="Time" options={times} onChange={(e, r) => setGroupTime(r.value)} value={groupTime}/><br/>
                         </div>
                         <Dropdown required className="is-open" fluid selection placeholder="Accepting new members?" options={trueFalse} onChange={(e, r) => setOpen(r.value)} value={open}/><br/>
-                        <Input required fluid className="input" placeholder="Group Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/>
+                        <div className="upload-container group-container">
+                        <label className="upload-pic">
+                            <Input required placeholder="Profile Picture" accept='image/*' type="file" onChange={(e) => handleOnChange(e)}/><br/>
+                            <img src="https://i.imgur.com/roNCcSz.png" alt="upload"></img><br/>
+                            { filename === "Upload Photo" ? filename : <span className="new-file">{filename}</span>}
+                        </label><br/>
+                        </div>
                         <Button id="create">Create Group</Button>
                     </Form>
                     <Button className="cancel" as={Link} to={`/profile/${loggedInUser.id}`}>Cancel</Button>

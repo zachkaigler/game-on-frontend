@@ -2,7 +2,7 @@ import { useState } from "react"
 import { NavLink, useHistory } from "react-router-dom"
 import NotificationsModal from "./NotificationsModal"
 
-function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, setLoggedInUserReceivedRequests, setSearchResults}) {
+function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, setLoggedInUserReceivedRequests, setSearchResults, loggedInUserProfPic}) {
     const [searchInput, setSearchInput] = useState("")
     const history = useHistory()
 
@@ -46,7 +46,7 @@ function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, se
                                                      loggedInUserReceivedRequests={loggedInUserReceivedRequests}
                                                      setLoggedInUserReceivedRequests={setLoggedInUserReceivedRequests}/> : null}
                 { loggedInUser ? <span className="icons"><NavLink to={`/conversations`} className="nav-elements"><img src="https://i.imgur.com/ovjG3p5.png" alt="messages" /></NavLink></span> : null}
-                { loggedInUser ? <NavLink to={`/profile/${loggedInUser.id}`}><img id="profile-badge-nav" src={loggedInUser.profile_pic} alt={loggedInUser.username} /></NavLink> : null}
+                { loggedInUser ? <NavLink to={`/profile/${loggedInUser.id}`}><img id="profile-badge-nav" src={loggedInUserProfPic} alt={loggedInUser.username} /></NavLink> : null}
                 { loggedInUser ? <NavLink to="/" onClick={handleClick} className="nav-elements log">Log Out</NavLink> : <NavLink to="/" className="nav-elements log">Log In</NavLink>}
             </div>
         </div>

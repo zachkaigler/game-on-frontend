@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router"
 import { Dropdown, Form, Label, Input, Button, TextArea } from "semantic-ui-react"
 import { Link } from "react-router-dom"
+import ChangePhotoModal from "./ChangePhotoModal"
 
 function EditGroup({ loggedInUser }) {
     const [groupName, setGroupName] = useState("")
@@ -10,7 +11,7 @@ function EditGroup({ loggedInUser }) {
     const [groupDay, setGroupDay] = useState("")
     const [groupTime, setGroupTime] = useState("")
     const [open, setOpen] = useState(true)
-    const [groupImage, setGroupImage] = useState("")
+    // const [groupImage, setGroupImage] = useState("")
     const [groupNameHeader, setGroupNameHeader] = useState("")
     const [isLoaded, setIsLoaded] = useState(false)
     const params = useParams()
@@ -20,7 +21,7 @@ function EditGroup({ loggedInUser }) {
         fetch(`http://localhost:3000/groups/${params.id}`, {
             method: "GET",
             headers: {
-                "Authorization": loggedInUser.token
+                "Authorization": localStorage.token
             }
         })
         .then(resp => resp.json())
@@ -33,10 +34,9 @@ function EditGroup({ loggedInUser }) {
             setGroupDay(dateSplit[0])
             setGroupTime(dateSplit[1])
             setOpen(data.open)
-            setGroupImage(data.group_image)
             setIsLoaded(true)
         })
-    }, [params.id, loggedInUser])
+    }, [params.id])
 
     const days = [
         {
@@ -223,7 +223,7 @@ function EditGroup({ loggedInUser }) {
             group_location: groupLocation,
             group_time: combinedTime,
             open: open,
-            group_image: groupImage
+            // group_image: groupImage
         }
 
         fetch(`http://localhost:3000/groups/${params.id}`, {
@@ -272,11 +272,12 @@ function EditGroup({ loggedInUser }) {
                             </div>
                             <Label className="label" id="new-members-label">Accepting new members?</Label>
                                 <Dropdown required fluid selection options={trueFalse} onChange={(e, r) => setOpen(r.value)} value={open}/><br/>
-                            <Label className="label">Group Picture</Label><br/>
-                                <Input required fluid className="input" placeholder="Profile Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/>
+                            {/* <Label className="label">Group Picture</Label><br/>
+                                <Input required fluid className="input" placeholder="Profile Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/> */}
                             <Button>Save Changes</Button>
                         </Form>
                     </div>
+                            <ChangePhotoModal flag="group" loggedInUser={loggedInUser}/> <br />
                             <Button className="delete" onClick={handleDelete}>Delete Group</Button><br />
                             <Button className="cancel" as={Link} to={`/groups/${params.id}`}>Cancel</Button>
                     </div> 

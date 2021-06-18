@@ -469,6 +469,10 @@ code {
   cursor: pointer;
 }
 
+.group-container {
+  box-shadow: none
+}
+
 .upload-pic {
   text-align: center;
   cursor: pointer;
@@ -648,4 +652,16 @@ input[type="file"] {
 
 #chat {
   margin-bottom: 2px;
+}
+
+.change-modal {
+  margin-bottom: 20px;
+}
+
+.save-changes {
+  margin-top: 13px
+}
+
+#location-label {
+  margin-top: 20px;
 }

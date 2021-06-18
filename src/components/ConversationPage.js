@@ -3,7 +3,7 @@ import { useParams } from "react-router"
 import { NavLink } from "react-router-dom"
 import { createConsumer } from "@rails/actioncable"
 
-function ConversationPage({ loggedInUser }) {
+function ConversationPage({ loggedInUser, loggedInUserProfPic }) {
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState("")
     const [otherUser, setOtherUser] = useState("")
@@ -107,7 +107,7 @@ function ConversationPage({ loggedInUser }) {
                 return (
                     <div className="sent-message" key={message.id}>
                         <p className="sent-message-temp">{message.content}</p>
-                        <NavLink to={`/profile/${loggedInUser.id}`}><img className="profile-badge convo" src={loggedInUser.profile_pic} alt={loggedInUser.username} /></NavLink>
+                        <NavLink to={`/profile/${loggedInUser.id}`}><img className="profile-badge convo" src={loggedInUserProfPic} alt={loggedInUser.username} /></NavLink>
                     </div>
                 )
             } else {
