@@ -254,7 +254,7 @@ function EditGroup({ loggedInUser }) {
     if (isLoaded) {
         return (
             <div className="page-container">
-                <div className="page-content">
+                <div className="page-content group-forms">
                     <h1 className="profile-h1 username">Edit {groupNameHeader}</h1>
                     <div className="edit-group">
                     <div className="line info-panel"></div>
@@ -287,7 +287,7 @@ function EditGroup({ loggedInUser }) {
     } else {
         return (
             <div className="page-container">
-                <div className="page-content">
+                <div className="page-content loading">
                             
                 </div>
             </div>

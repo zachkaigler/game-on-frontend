@@ -67,8 +67,8 @@ function FindGroups({loggedInUser, loggedInUserGames}) {
     } else {
         return (
             <div className="page-container">
-                <div className="page-content">
-                    
+                <div className="page-content loading">
+                    <img src="https://i.imgur.com/dqYD0De.gif" alt="loading" style={{ height: "400px" }} className="loading-gif"/>
                 </div>
             </div>
         )

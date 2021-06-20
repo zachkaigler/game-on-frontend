@@ -277,7 +277,7 @@ function CreateGroup({loggedInUser}) {
 
         return (
             <div className="page-container">
-                <div className="page-content">
+                <div className="page-content group-forms">
                 <h1 className="profile-h1 username">New Group</h1>
                 <div className="line info-panel"></div>
                 <div className="edit-group">
@@ -309,7 +309,7 @@ function CreateGroup({loggedInUser}) {
     } else {
         return (
             <div className="page-container unloaded">
-                <div className="page-content unloaded">
+                <div className="page-content loading">
                     
                 </div>
             </div>

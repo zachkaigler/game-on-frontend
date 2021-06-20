@@ -29,7 +29,7 @@ function Profile({ loggedInUser, loggedInUserConversations, setLoggedInUserConve
     } else {
         return (
             <div className="page-container">
-                <div className="page-content">
+                <div className="page-content loading">
                     
                 </div>
             </div>

@@ -3,7 +3,7 @@ import { useParams } from "react-router"
 import { NavLink } from "react-router-dom"
 import { createConsumer } from "@rails/actioncable"
 
-function ConversationPage({ loggedInUser, loggedInUserProfPic }) {
+function ConversationPage({ loggedInUser, loggedInUserProfPic, loggedInUserUnreadMessages, setLoggedInUserUnreadMessages }) {
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState("")
     const [otherUser, setOtherUser] = useState("")
@@ -30,9 +30,6 @@ function ConversationPage({ loggedInUser, loggedInUserProfPic }) {
             setIsLoaded(true)
         })
     }, [params.id, loggedInUser.id])
-
-    console.log(messages)
-    // console.log(params.id)
     
     const cable = useRef()
 
@@ -46,19 +43,39 @@ function ConversationPage({ loggedInUser, loggedInUserProfPic }) {
         }
         const handlers = {
             received(data) {
-                console.log(data)
-
-                const pkg = {
-                    content: data.message.content,
-                    conversation_id: data.message.conversation_id,
-                    id: data.message.id,
-                    read: false,
-                    user_id: data.message.user_id,
-                    user_prof_pic: data.user_prof_pic,
-                    user_username: data.user_username
+                if (data.message.user_id !== loggedInUser.id) {
+                    const pkg = {
+                        content: data.message.content,
+                        conversation_id: data.message.conversation_id,
+                        id: data.message.id,
+                        read: true,
+                        user_id: data.message.user_id,
+                        user_prof_pic: data.user_prof_pic,
+                        user_username: data.user_username
+                    }
+                    setMessages([...messages, pkg])
+                    fetch(`http://localhost:3000/messages/${data.message.id}`, {
+                        method: "PATCH",
+                        headers: {
+                            "content-type": "application/json",
+                            "Authorization": loggedInUser.token
+                        },
+                        body: JSON.stringify({
+                            read: true
+                        })   
+                    })
+                } else {
+                    const pkg = {
+                        content: data.message.content,
+                        conversation_id: data.message.conversation_id,
+                        id: data.message.id,
+                        read: false,
+                        user_id: data.message.user_id,
+                        user_prof_pic: data.user_prof_pic,
+                        user_username: data.user_username
+                    }
+                    setMessages([...messages, pkg])
                 }
-
-                setMessages([...messages, pkg])
             },
             connected() {
                 console.log("connected")
@@ -76,27 +93,29 @@ function ConversationPage({ loggedInUser, loggedInUserProfPic }) {
             cable.current = null
             subscription.unsubscribe()
         }
-    }, [params.id, messages])
+    }, [params.id, messages, loggedInUser.id, loggedInUser.token])
 
-    // useEffect(() => {
-    //     const cable = createConsumer("ws://localhost:3000/cable")
-    //     const paramsToSend = {
-    //         channel: "ConversationChannel",
-    //         id: params.id
-    //     }
-    //     const handlers = {
-    //         received(data) {
-    //             setMessages([...messages, data])
-    //         },
-    //         connected() {
-    //             console.log("connected")
-    //         },
-    //         disconnected() {
-    //             console.log("disconnected")
-    //         }
-    //     }
-    //     cable.subscriptions.create(paramsToSend, handlers)
-    // }, [params.id, messages])
+    useEffect(() => {
+        // eslint-disable-next-line
+        const filteredMessages = loggedInUserUnreadMessages.filter((msg) => msg.conversation_id == params.id)
+        setLoggedInUserUnreadMessages([...loggedInUserUnreadMessages].filter((msg) => !filteredMessages.includes(msg)))
+
+        if (filteredMessages.length !== 0) {
+            filteredMessages.forEach((msg) => {
+                fetch(`http://localhost:3000/messages/${msg.id}`, {
+                    method: "PATCH",
+                    headers: {
+                        "content-type": "application/json",
+                        "Authorization": loggedInUser.token
+                    },
+                    body: JSON.stringify({
+                        read: true
+                    })   
+                })
+            })
+        }
+        // eslint-disable-next-line
+    }, [])
 
     if (isLoaded) {
 
@@ -131,7 +150,6 @@ function ConversationPage({ loggedInUser, loggedInUserProfPic }) {
                     read: false
                 }
     
-                // setMessages([...messages, data])
                 setNewMessage("")
     
                 fetch("http://localhost:3000/messages", {
@@ -142,8 +160,6 @@ function ConversationPage({ loggedInUser, loggedInUserProfPic }) {
                     },
                     body: JSON.stringify(data)
                 })
-                // .then(resp=>resp.json())
-                // .then(msg => setMessages([...messages, msg]))
             }
         }
 
@@ -155,19 +171,19 @@ function ConversationPage({ loggedInUser, loggedInUserProfPic }) {
                     <div className="messages-container">
                         {messageBubbles}
                     </div>
-                        <div className="message-form">
-                            <form onSubmit={handleSubmit}>
-                                <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className="message-input"/>
-                                <button type="submit" className="message-button">Send</button>
-                            </form>
-                        </div>
+                    <div className="message-form">
+                        <form onSubmit={handleSubmit}>
+                            <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} className="message-input"/>
+                            <button type="submit" className="message-button">Send</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         )
     } else {
         return(
             <div className="page-container">
-                <div className="page-content">
+                <div className="page-content loading">
                     
                 </div>
             </div>

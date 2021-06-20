@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { NavLink, useHistory } from "react-router-dom"
+import { Label } from 'semantic-ui-react'
 import NotificationsModal from "./NotificationsModal"
 
-function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, setLoggedInUserReceivedRequests, setSearchResults, loggedInUserProfPic}) {
+function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, setLoggedInUserReceivedRequests, setSearchResults, loggedInUserProfPic, loggedInUserUnreadMessages}) {
     const [searchInput, setSearchInput] = useState("")
     const history = useHistory()
 
@@ -30,6 +31,19 @@ function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, se
         })
     }
 
+    function renderMsgNotifications() {
+        if (loggedInUserUnreadMessages.length === 0) {
+            return <span className="icons"><NavLink to={`/conversations`} className="nav-elements"><img src="https://i.imgur.com/ovjG3p5.png" alt="messages" /></NavLink></span>
+        } else {
+            return (
+                <span className="icons-msg-container">
+                    <span className="notification-count-msg notification-badge-nav"><Label circular color="red">{loggedInUserUnreadMessages.length}</Label></span>
+                    <span className="icons"><NavLink to={`/conversations`} className="nav-elements"><img src="https://i.imgur.com/ovjG3p5.png" alt="messages" /></NavLink></span>
+                </span>
+            )
+        }
+    }
+
     return (
         <div className="nav-header">
             <div className="nav-search-bar-container">
@@ -45,7 +59,7 @@ function Header({loggedInUser, setLoggedInUser, loggedInUserReceivedRequests, se
                 { loggedInUser ? <NotificationsModal loggedInUser={loggedInUser}
                                                      loggedInUserReceivedRequests={loggedInUserReceivedRequests}
                                                      setLoggedInUserReceivedRequests={setLoggedInUserReceivedRequests}/> : null}
-                { loggedInUser ? <span className="icons"><NavLink to={`/conversations`} className="nav-elements"><img src="https://i.imgur.com/ovjG3p5.png" alt="messages" /></NavLink></span> : null}
+                { loggedInUser ? renderMsgNotifications() : null}
                 { loggedInUser ? <NavLink to={`/profile/${loggedInUser.id}`}><img id="profile-badge-nav" src={loggedInUserProfPic} alt={loggedInUser.username} /></NavLink> : null}
                 { loggedInUser ? <NavLink to="/" onClick={handleClick} className="nav-elements log">Log Out</NavLink> : <NavLink to="/" className="nav-elements log">Log In</NavLink>}
             </div>

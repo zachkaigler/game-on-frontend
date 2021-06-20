@@ -45,7 +45,7 @@ function GroupPage({ loggedInUser, loggedInUserSentRequests, setLoggedInUserSent
     } else {
         return (
             <div className="page-container">
-                <div className="page-content">
+                <div className="page-content loading">
                         
                 </div>
             </div>
