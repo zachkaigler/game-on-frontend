@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
+import BanterBoard from "./BanterBoard"
 import GroupPageInfo from "./GroupPageInfo"
 import MembersInfo from "./MembersInfo"
 
@@ -7,6 +8,7 @@ function GroupPage({ loggedInUser, loggedInUserSentRequests, setLoggedInUserSent
     const [groupData, setGroupData] = useState({})
     const [membersArray, setMembersArray] = useState([])
     const [membershipsArray, setMembershipsArray] = useState([])
+    const [posts, setPosts] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
     const params = useParams()
 
@@ -17,9 +19,12 @@ function GroupPage({ loggedInUser, loggedInUserSentRequests, setLoggedInUserSent
             setGroupData(serverData)
             setMembersArray(serverData.users)
             setMembershipsArray(serverData.memberships)
+            setPosts(serverData.posts)
             setIsLoaded(true)
         })
     }, [params.id])
+
+    // console.log(new Date().toLocaleString())
 
     if (isLoaded) {
         return (
@@ -39,6 +44,12 @@ function GroupPage({ loggedInUser, loggedInUserSentRequests, setLoggedInUserSent
                                      setMembersArray={setMembersArray} 
                                      membershipsArray={membershipsArray}
                                      setMembershipsArray={setMembershipsArray}/>
+                        <BanterBoard membersArray={membersArray}
+                                     loggedInUser={loggedInUser}
+                                     posts={posts}
+                                     setPosts={setPosts}
+                                     groupData={groupData}
+                                     />
                 </div>
             </div>
         )

@@ -241,6 +241,7 @@ code {
 .badge-container {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .kick {
@@ -702,11 +703,150 @@ input[type="file"] {
 }
 
 .loading-gif {
-  align-self: center;
-  margin-top: 15%;
+  /* align-self: center; */
+  margin-top: 8%;
   margin-bottom: 15%;
 }
 
 .group-forms {
   height: 100vh;
+}
+
+.post-form {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+.moods-select {
+  -webkit-appearance: none;
+  font-size: 48px;
+}
+
+.banter-form-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.post-textarea {
+  border-radius: 20px;
+  border-width: 8px;
+  background-color: #f9f9f9;
+  border-color: #dedede;
+  /* border: none; */
+  /* box-shadow: 0px 0px 40px rgba(181, 181, 181, 0.671); */
+  padding: 10px;
+  resize: none;
+}
+
+.post-textarea:focus {
+  outline: none;
+}
+
+.moods-select {
+  background-color: #dedede;
+  border: none;
+}
+
+.moods-select:focus {
+  outline: none;
+}
+
+.select-label {
+  font-family: 'Prompt', sans-serif;
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.lower-container {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: -30px;
+  margin-bottom: 40px;
+  /* width: 1100px; */
+}
+
+.mood-block {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  background-color: #dedede;
+  width: fit-content;
+  /* margin-left: 21%; */
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 0px 0px 20px 20px;
+  margin-right: 5%;
+}
+
+.mood-tag {
+  font-size: 40px;
+  left: 105px
+}
+
+.posts-container {
+  margin-left: 7%;
+  margin-right: 7%;
+  margin-bottom: 40px;
+}
+
+.post-card {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.post-card:hover {
+  background-color: #fff8e2;
+}
+
+.poster-info {
+  font-family: 'Prompt', sans-serif;
+  font-size: 30px;
+}
+
+.post-content {
+  font-family: 'Prompt', sans-serif;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.post-date {
+  margin-top: 20px;
+}
+
+.banter-badge {
+  margin-top: 0px;
+}
+
+.post-content-container {
+  margin-left: 20px
+}
+
+.post-date {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.banter-break {
+  border-bottom: 1px solid #dedede;
+  padding: 0px;
+  margin: 0px
+}
+
+.box-shadow-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 7%;
+  margin-right: 7%;
+  /* width: 80%; */
 }

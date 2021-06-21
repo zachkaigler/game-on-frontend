@@ -10,7 +10,7 @@ function FindGroups({loggedInUser, loggedInUserGames}) {
         .then(resp => resp.json())
         .then((serverGroups) => {
             setGroupsArray(serverGroups)
-            setIsLoaded(true)
+            setTimeout(() => {setIsLoaded(true)}, 2500)
         })
     }, [])
 
