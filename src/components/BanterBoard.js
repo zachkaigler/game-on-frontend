@@ -38,7 +38,6 @@ function BanterBoard({ membersArray, loggedInUser, posts, setPosts, groupData })
                                     <option value="🤯" className="option">🤯</option>
                                 </select>
                             </div>
-                            {/* <Dropdown required value={mood} options={moods} onChange={(e, r) => setMood(r.value)} placeholder="Mood?" className="moods-select"/><br/> */}
                             <Button>Submit</Button>
                         </div>
                     </div>
@@ -70,57 +69,8 @@ function BanterBoard({ membersArray, loggedInUser, posts, setPosts, groupData })
         .then((newPost) => setPosts([...posts, newPost]))
     }
 
-    const postCards = posts.map((post) => <PostCard post={post} key={post.id} loggedInUser={loggedInUser} groupData={groupData}/>)
+    const postCards = posts.map((post) => <PostCard post={post} key={post.id} loggedInUser={loggedInUser} groupData={groupData} posts={posts} setPosts={setPosts}/>)
     const postCardsOrdered = [...postCards].reverse()
-
-    // const moods = [
-    //     {
-    //         key: "😀",
-    //         text: "😀",
-    //         value: "😀",
-    //     },
-    //     {
-    //         key: "😂",
-    //         text: "😂",
-    //         value: "😂",
-    //     },
-    //     {
-    //         key: "😜",
-    //         text: "😜",
-    //         value: "😜",
-    //     },
-    //     {
-    //         key: "😎",
-    //         text: "😎",
-    //         value: "😎",
-    //     },
-    //     {
-    //         key: "🤔",
-    //         text: "🤔",
-    //         value: "🤔",
-    //     },
-    //     {
-    //         key: "🤬",
-    //         text: "🤬",
-    //         value: "🤬",
-    //     },
-    //     {
-    //         key: "😱",
-    //         text: "😱",
-    //         value: "😱",
-    //     },
-    //     {
-    //         key: "😭",
-    //         text: "😭",
-    //         value: "😭",
-    //     },
-    //     {
-    //         key: "🤯",
-    //         text: "🤯",
-    //         value: "🤯",
-    //     },
-    // ]
-
 
     return(
         <div className="groups-info">

@@ -850,3 +850,22 @@ input[type="file"] {
   margin-right: 7%;
   /* width: 80%; */
 }
+
+.delete-post {
+  cursor: pointer;
+}
+
+.no-matches {
+  font-family: 'Prompt', sans-serif;
+  font-size: 25px;
+  margin-top: 150px;
+  margin-bottom: 50%;
+}
+
+.no-matches a {
+  color: #ff860b;
+}
+
+.no-matches a:hover {
+  text-decoration: underline;
+}

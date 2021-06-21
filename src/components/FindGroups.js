@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import GroupCard from "./GroupCard"
 
 function FindGroups({loggedInUser, loggedInUserGames}) {
@@ -59,7 +60,7 @@ function FindGroups({loggedInUser, loggedInUserGames}) {
                 <h1 className="profile-h1" id="groups">Discover New Groups</h1>
                 <div className="line info-panel"></div>
                     <div className="card-container">
-                        {displayGroups}
+                        {displayGroups.length !== 0 ? displayGroups : <span className="no-matches"><p>We've got no matches right now. <Link to="/games">Try following more games!</Link></p></span>}
                     </div>
                 </div>
             </div>
