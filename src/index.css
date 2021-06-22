@@ -173,9 +173,19 @@ code {
   background-color: #f3f2f2;
   height: 250px;
   width: 600px;
-  margin: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   box-shadow: 10px 10px 10px rgba(181, 181, 181, 0.671);
   border-radius: 30px;
+
+  /* -webkit-transition: margin 0.5s ease-out;
+    -moz-transition: margin 0.5s ease-out;
+    -o-transition: margin 0.5s ease-out; */
+}
+
+.group-card:hover {
+  background-color: #e9e8e8;
+  /* margin-top: 5px; */
 }
 
 .games-list {
@@ -256,6 +266,7 @@ code {
 .group-card-link {
   color: black;
   width: 600px;
+  margin-right: 30px;
 }
 
 .group-card-link:hover {
@@ -868,4 +879,30 @@ input[type="file"] {
 
 .no-matches a:hover {
   text-decoration: underline;
+}
+
+.profile-groups {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* .groups-line {
+  margin-bottom: 40px;
+} */
+
+.no-groups {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.no-posts {
+  margin-left: 43%;
+  padding-top: 5%;
+  margin-bottom: 10%;
+}
+
+.no-results {
+  margin-left: 40%;
+  padding-bottom: 50%;
 }

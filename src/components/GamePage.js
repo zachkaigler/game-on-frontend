@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
-import { NavLink } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 import { Button, Popup } from "semantic-ui-react"
 import GroupCard from "./GroupCard"
 
@@ -24,6 +24,12 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
     }, [params.id])
     
     if (isLoaded) {
+
+        // if (loggedInUser) {
+        //     console.log(interests)
+        //     console.log(loggedInUser.id)
+        // }
+
         function destroyInterest() {
             let foundInterest = interests.find((interest) => {
                 return interest.user_id === loggedInUser.id
@@ -38,6 +44,7 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
                 method: "DELETE",
                 headers: {"Authorization": localStorage.token}
             })
+            setInterests([...interests].filter((interest) => interest !== foundInterest))
         }
 
         function createInterest() {
@@ -54,6 +61,8 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
                     game_id: gameData.id
                 })
             })
+            .then(resp => resp.json())
+            .then((newInterest) => setInterests([...interests, newInterest]))
         }
         
         const userIcons = usersPlaying.map((user) => {
@@ -96,12 +105,12 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
                     </div>
                    <div className="line info-panel"></div>
                    <div className="game-player-list">
-                       { usersPlaying.length === 0 ? <p>N/A</p> : userIcons }
+                       { usersPlaying.length === 0 ? <span className="no-matches no-groups"><p>None yet. You could be the first!</p></span> : userIcons }
                    </div>
                    <h1 className="profile-h1 game-page">{gameData.name} groups</h1>
                    <div className="line info-panel"></div>
-                   <div className="card-container">
-                        { gameData.groups.length === 0 ? <p>N/A</p> : groups }
+                   <div className="card-container profile-groups">
+                        { gameData.groups.length === 0 ? <span className="no-matches no-groups"><p>None yet. <Link to="/creategroup">Create one!</Link></p></span> : groups }
                    </div>
                 </div>
             </div>

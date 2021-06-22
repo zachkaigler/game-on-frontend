@@ -5,10 +5,11 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import './index.css';
+import ScrollToTop from './ScrollToTop';
 
 ReactDOM.render(
   <BrowserRouter>
-    
+      <ScrollToTop />
       <App />
     
   </BrowserRouter>,

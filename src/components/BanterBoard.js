@@ -78,7 +78,7 @@ function BanterBoard({ membersArray, loggedInUser, posts, setPosts, groupData })
             <div className="line info-panel"></div>
             { isUserMember() ? renderForm() : null }
             <div className="posts-container">
-                { posts.length !== 0 ? postCardsOrdered : <p>*crickets*</p>}
+                { posts.length !== 0 ? postCardsOrdered : <p className="no-matches no-posts">*crickets*</p>}
             </div>
         </div>
     )

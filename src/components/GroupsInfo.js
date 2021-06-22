@@ -19,8 +19,8 @@ function GroupsInfo({userData}) {
     return (
         <div className="groups-info">
             <h1 className="profile-h1" id="groups">Groups ({combinedGroups.length})</h1>
-            <div className="line info-panel"></div>
-            <div className="card-container">
+            <div className="line info-panel groups-line"></div>
+            <div className="card-container profile-groups">
                 {groups}
             </div>
         </div>

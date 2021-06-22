@@ -78,7 +78,7 @@ function SearchResults({ searchResults, loggedInUser, setSearchResults }) {
                         { searchResults.game_results.length !== 0 ? gameResults : null }
                     </div>
 
-                    { searchResults.user_results.length === 0 && searchResults.group_results.length === 0 && searchResults.game_results.length === 0 ? <p>Sorry, we got nothin'.</p> : null }
+                    { searchResults.user_results.length === 0 && searchResults.group_results.length === 0 && searchResults.game_results.length === 0 ? <p className="no-matches no-results">Sorry, we got nothin'.</p> : null }
                 </div>
             </div>
         )
