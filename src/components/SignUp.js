@@ -53,44 +53,6 @@ function SignUp({ onLogin }) {
         setFilename(e.target.files[0].name)
     }
 
-    // function handleSubmit(e) {
-    //     e.preventDefault()
-
-    //     if (password !== password2) {
-    //         alert("Passwords must match")
-    //     } else {
-    //         let newUser = {
-    //             username: username,
-    //             password: password,
-    //             email: email,
-    //             profile_pic: picture
-    //         }
-
-    //         fetch("http://localhost:3000/users", {
-    //             method: "POST",
-    //             headers: {
-    //                 "content-type": "application/json"
-    //             },
-    //             body: JSON.stringify(newUser)
-    //         })
-    //         .then(resp => resp.json())
-    //         .then((createdUser) => {
-    //             if (createdUser.error) {
-    //                 alert(createdUser.error)
-    //                 setUsername("")
-    //                 setPassword("")
-    //                 setPassword2("")
-    //                 setEmail("")
-    //                 setPicture("")
-    //             } else {
-    //                 localStorage.token = createdUser.token
-    //                 onLogin(createdUser)
-    //                 history.push(`/profile/${createdUser.id}`)
-    //             }
-    //         })
-    //     }
-    // }
-
     return (
         <div className="login-signup-page">
             <div className="login-signup signup">

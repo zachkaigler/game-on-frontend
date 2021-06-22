@@ -11,7 +11,6 @@ function EditGroup({ loggedInUser }) {
     const [groupDay, setGroupDay] = useState("")
     const [groupTime, setGroupTime] = useState("")
     const [open, setOpen] = useState(true)
-    // const [groupImage, setGroupImage] = useState("")
     const [groupNameHeader, setGroupNameHeader] = useState("")
     const [isLoaded, setIsLoaded] = useState(false)
     const params = useParams()
@@ -222,8 +221,7 @@ function EditGroup({ loggedInUser }) {
             group_about: groupAbout,
             group_location: groupLocation,
             group_time: combinedTime,
-            open: open,
-            // group_image: groupImage
+            open: open
         }
 
         fetch(`http://localhost:3000/groups/${params.id}`, {
@@ -272,8 +270,6 @@ function EditGroup({ loggedInUser }) {
                             </div>
                             <Label className="label" id="new-members-label">Accepting new members?</Label>
                                 <Dropdown required fluid selection options={trueFalse} onChange={(e, r) => setOpen(r.value)} value={open}/><br/>
-                            {/* <Label className="label">Group Picture</Label><br/>
-                                <Input required fluid className="input" placeholder="Profile Picture" type="url" value={groupImage} onChange={(e) => setGroupImage(e.target.value)}/><br/> */}
                             <Button>Save Changes</Button>
                         </Form>
                     </div>

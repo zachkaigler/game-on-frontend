@@ -11,7 +11,6 @@ function SearchResults({ searchResults, loggedInUser, setSearchResults }) {
                 return (
                     <div>
                         <h1 className="profile-h1 game-page search-label">Users</h1> 
-                        {/* <div className="line info-panel"></div> */}
                     </div>
                 )
             } else {
@@ -24,7 +23,6 @@ function SearchResults({ searchResults, loggedInUser, setSearchResults }) {
                 return (
                     <div>
                         <h1 className="profile-h1 game-page search-label">Groups</h1> 
-                        {/* <div className="line info-panel"></div> */}
                     </div>
                 )
             } else {
@@ -37,7 +35,6 @@ function SearchResults({ searchResults, loggedInUser, setSearchResults }) {
                 return (
                     <div>
                         <h1 className="profile-h1 game-page search-label">Games</h1> 
-                        {/* <div className="line info-panel"></div> */}
                     </div>
                 )
             } else {
@@ -59,7 +56,7 @@ function SearchResults({ searchResults, loggedInUser, setSearchResults }) {
    
         return (
             <div className="page-container">
-                <div className="page-content">
+                <div className="page-content search-results-page">
                     <h1 className="profile-h1 username">Search Results</h1>
                     <div className="line info-panel"></div>
 

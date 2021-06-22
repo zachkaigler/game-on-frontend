@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { Form, Input, Button, TextArea, Label } from "semantic-ui-react";
 import { Redirect, useHistory, Link } from "react-router-dom"
-// import ChangeProfilePicModal from "./ChangeProfilePicModal";
 import ChangePhotoModal from "./ChangePhotoModal";
 
 function EditProfile( {loggedInUser, setLoggedInUserProfPic} ) {
     const [bio, setBio] = useState("")
     const [location, setLocation] = useState("")
-    // const [picture, setPicture] = useState("")
     const history = useHistory()
     
     useEffect(() => {
@@ -22,7 +20,6 @@ function EditProfile( {loggedInUser, setLoggedInUserProfPic} ) {
             .then(data => {
                 setBio(data.bio)
                 setLocation(data.location)
-                // setPicture(data.profile_pic)
             })
         }
     }, [loggedInUser])
@@ -40,12 +37,10 @@ function EditProfile( {loggedInUser, setLoggedInUserProfPic} ) {
                 body: JSON.stringify({
                     bio: bio,
                     location: location,
-                    // profile_pic: picture
                 })
             })
             .then(resp => resp.json())
             .then((updatedUser) => {
-                // console.log(updatedUser)
                 history.push(`/profile/${loggedInUser.id}`)
             })
         }

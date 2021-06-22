@@ -61,36 +61,6 @@ function CreateGroup({loggedInUser}) {
             })
         }
 
-        // function handleSubmit(e) {
-        //     e.preventDefault()
-
-        //     let combinedTime = [groupDay, groupTime].join(", ") 
-
-        //     let data = {
-        //         group_name: groupName,
-        //         group_about: groupAbout,
-        //         group_location: groupLocation,
-        //         group_time: combinedTime,
-        //         open: open,
-        //         group_image: groupImage,
-        //         game_id: selectedGame,
-        //         user_id: loggedInUser.id
-        //     }
-
-        //     fetch("http://localhost:3000/groups", {
-        //         method: "POST",
-        //         headers: {
-        //             "content-type": "application/json",
-        //             "Authorization": loggedInUser.token
-        //         },
-        //         body: JSON.stringify(data)
-        //     })
-        //     .then(resp => resp.json())
-        //     .then(newGroup => {
-        //         history.push(`/groups/${newGroup.id}`)
-        //     })
-        // }
-
         const gameOptions = games.map(game => {
             return (
                 {

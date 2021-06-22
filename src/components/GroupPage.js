@@ -24,8 +24,6 @@ function GroupPage({ loggedInUser, loggedInUserSentRequests, setLoggedInUserSent
         })
     }, [params.id])
 
-    // console.log(new Date().toLocaleString())
-
     if (isLoaded) {
         return (
             <div className="page-container">

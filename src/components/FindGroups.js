@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import GroupCard from "./GroupCard"
+import GroupCardLarge from "./GroupCardLarge"
 
 function FindGroups({loggedInUser, loggedInUserGames}) {
     const [isLoaded, setIsLoaded] = useState(false)
@@ -32,7 +32,7 @@ function FindGroups({loggedInUser, loggedInUserGames}) {
             return array;
           }
 
-        const matchingGroups = groupsArray.filter((group) => {
+          const matchingGroups = groupsArray.filter((group) => {
             if (loggedInUserGames.map((game) => game.id).includes(group.game_id) && group.open && group.user_id !== loggedInUser.id && !group.users.map((user) => user.id).includes(loggedInUser.id)) {
                 return group
             } else {
@@ -40,27 +40,30 @@ function FindGroups({loggedInUser, loggedInUserGames}) {
             }
         })
 
-        const randomizedMatchingGroups = shuffle(matchingGroups)
-
-        const displayGroups = randomizedMatchingGroups.map((group) => {
-            return <GroupCard key={group.id}
+        const displayGroups = matchingGroups.map((group) => {
+            return <GroupCardLarge key={group.id}
                               name={group.group_name}
                               game={group.game.name}
                               location={group.group_location}
                               time={group.group_time}
-                              members={group.users.length}
+                              members={group.users}
                               image={group.group_image}
                               id={group.id}
+                              groupsArray={groupsArray}
+                              setGroupsArray={setGroupsArray}
+                              group={group}
                     />
         })
 
+        const randomizedCards = shuffle(displayGroups)
+
         return (
             <div className="page-container">
-                <div className="page-content">
+                <div className="page-content discover">
                 <h1 className="profile-h1" id="groups">Discover New Groups</h1>
                 <div className="line info-panel"></div>
-                    <div className="card-container">
-                        {displayGroups.length !== 0 ? displayGroups : <span className="no-matches"><p>We've got no matches right now. <Link to="/games">Try following more games!</Link></p></span>}
+                    <div className="card-container-discover">
+                        {displayGroups.length !== 0 ? randomizedCards : <span className="no-matches group-card-large-container"><p>We've got no matches right now.<br/> <Link to="/games">Try following more games!</Link></p></span>}
                     </div>
                 </div>
             </div>

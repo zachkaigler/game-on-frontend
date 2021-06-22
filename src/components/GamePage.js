@@ -25,11 +25,6 @@ function GamePage({loggedInUser, loggedInUserGames, setLoggedInUserGames}) {
     
     if (isLoaded) {
 
-        // if (loggedInUser) {
-        //     console.log(interests)
-        //     console.log(loggedInUser.id)
-        // }
-
         function destroyInterest() {
             let foundInterest = interests.find((interest) => {
                 return interest.user_id === loggedInUser.id

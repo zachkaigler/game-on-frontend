@@ -68,25 +68,6 @@ function App() {
     }
   }, [])
 
-  // setInterval(() => {
-  //   fetch("http://localhost:3000/keep_logged_in", {
-  //       method: "GET",
-  //       headers: {
-  //         "Authorization": localStorage.token
-  //       }
-  //     })
-  //     .then(resp => resp.json())
-  //     .then(data => {
-  //       const allUnreadMessages = []
-  //       data.all_conversations.forEach((convo) => convo.unread_messages.forEach((msg) => {
-  //         if (msg.user_id !== data.id) {
-  //           allUnreadMessages.push(msg)
-  //         }
-  //       }))
-  //       setLoggedInUserUnreadMessages([...allUnreadMessages])
-  //     })
-  // }, 10000)
-
   return (
     <div className="App">
        { loggedInUser ? <Header loggedInUser={loggedInUser} 

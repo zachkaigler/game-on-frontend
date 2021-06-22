@@ -63,7 +63,6 @@ code {
   display: flex;
   align-items: flex-end;
   position: relative;
-  /* top: 20% */
 }
 
 .nav-search-bar-container {
@@ -177,15 +176,10 @@ code {
   margin-bottom: 20px;
   box-shadow: 10px 10px 10px rgba(181, 181, 181, 0.671);
   border-radius: 30px;
-
-  /* -webkit-transition: margin 0.5s ease-out;
-    -moz-transition: margin 0.5s ease-out;
-    -o-transition: margin 0.5s ease-out; */
 }
 
 .group-card:hover {
   background-color: #e9e8e8;
-  /* margin-top: 5px; */
 }
 
 .games-list {
@@ -280,7 +274,6 @@ code {
   height:200px;
 }
 
-
 .bold {
   font-weight: bold;
 }
@@ -342,7 +335,6 @@ code {
   margin-left: 5%;
 }
 
-/* Check here if nav icon spacing gets messed up when notification goes away */
 .notification-count {
   font-size: 35px;
   position: relative;
@@ -435,7 +427,6 @@ code {
   width: 65%;
   margin: 20px;
   box-shadow: 0px 0px 40px rgba(223, 205, 161, 0.671)
-  /* box-shadow: 0px 10px 10px rgba(223, 205, 161, 0.671); */
 }
 
 .login-signup-links{
@@ -714,7 +705,6 @@ input[type="file"] {
 }
 
 .loading-gif {
-  /* align-self: center; */
   margin-top: 8%;
   margin-bottom: 15%;
 }
@@ -746,8 +736,6 @@ input[type="file"] {
   border-width: 8px;
   background-color: #f9f9f9;
   border-color: #dedede;
-  /* border: none; */
-  /* box-shadow: 0px 0px 40px rgba(181, 181, 181, 0.671); */
   padding: 10px;
   resize: none;
 }
@@ -777,7 +765,6 @@ input[type="file"] {
   align-items: baseline;
   margin-top: -30px;
   margin-bottom: 40px;
-  /* width: 1100px; */
 }
 
 .mood-block {
@@ -787,7 +774,6 @@ input[type="file"] {
   align-items: center;
   background-color: #dedede;
   width: fit-content;
-  /* margin-left: 21%; */
   padding-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
@@ -859,7 +845,6 @@ input[type="file"] {
   justify-content: center;
   margin-left: 7%;
   margin-right: 7%;
-  /* width: 80%; */
 }
 
 .delete-post {
@@ -887,10 +872,6 @@ input[type="file"] {
   justify-content: center;
 }
 
-/* .groups-line {
-  margin-bottom: 40px;
-} */
-
 .no-groups {
   margin-top: 10%;
   margin-bottom: 10%;
@@ -905,4 +886,96 @@ input[type="file"] {
 .no-results {
   margin-left: 40%;
   padding-bottom: 50%;
+}
+
+.card-container-discover {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr) 2fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.group-card-large-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-area: 1 / 2 / 4 / 5
+}
+
+.group-card-large {
+  font-family: 'Prompt', sans-serif;
+  text-align: center;
+  background-color: #f3f2f2;
+  height: 800px;
+  width: 600px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  border: solid;
+  border-width: 8px;
+  border-color: #dedede;
+}
+
+.group-card-large-img {
+  margin: 10px;
+  object-fit: cover;
+  width: 350px;
+  height: 350px;
+}
+
+.group-card-large-h1 {
+  color: #ff860b;
+  padding-top: 20px;
+  font-size: 35px;
+}
+
+.group-card-large-badge-container {
+  overflow: auto;
+  height: 280px;
+}
+
+.discover {
+  height: 100vh;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.discover-buttons {
+  margin-top: -27px;
+  background-color: #dedede;
+  border-radius: 10px;
+}
+
+.discover-btn {
+  border: none;
+  padding: 20px;
+  margin: 8px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family: 'Prompt', sans-serif;
+}
+
+.interested {
+  background-color: #aed2b1;
+  margin-right: 4px;
+}
+
+.interested:hover {
+  background-color: #a9c1aa;
+}
+
+.pass {
+  background-color: #d7ada8;
+  margin-left: 4px;
+}
+
+.pass:hover {
+  background-color: #c6b8b6;
+}
+
+.group-card-large-details {
+  font-size: 20px;
+  margin-top: 20px;
 }
